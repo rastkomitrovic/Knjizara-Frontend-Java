@@ -1,0 +1,19 @@
+package com.fon.knjizarafrontend;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
+
+@SpringBootApplication
+public class KnjizaraFrontendJavaApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(KnjizaraFrontendJavaApplication.class, args);
+	}
+
+	@Bean
+	public RestTemplate restTemplate(){
+		return new RestTemplate();
+	}
+}
