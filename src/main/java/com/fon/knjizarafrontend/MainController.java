@@ -1,27 +1,26 @@
 package com.fon.knjizarafrontend;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fon.knjizarafrontend.dto.CountryDTO;
-import net.bytebuddy.dynamic.scaffold.MethodGraph;
+import com.fon.knjizarafrontend.service.AuthorService;
+import com.fon.knjizarafrontend.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.client.RestTemplate;
-
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 
 @Controller
 public class MainController {
 
+    @Autowired
+    private CountryService countryService;
+
+    @Autowired
+    private AuthorService authorService;
+
     @GetMapping("/hello")
-    public String helloPage(Model model){
-
-
+    public String helloPage(Model model) {
+        ResponseEntity<Object> res = authorService.deleteAuthor(2L);
+        System.out.println(res.getStatusCode().toString());
         return "hello";
     }
 }

@@ -4,40 +4,42 @@ import com.fon.knjizarafrontend.constants.ApiConstants;
 import com.fon.knjizarafrontend.dto.CountryDTO;
 import com.fon.knjizarafrontend.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
-
 @Service
 public class CountryServiceImpl implements CountryService {
-
     @Autowired
     private RestTemplate restTemplate;
 
+    private final String api = ApiConstants.countriesApi;
+
     @Override
     public ResponseEntity<CountryDTO> getCountryByCountryId(Long countryId) {
-        return restTemplate.getForEntity(ApiConstants.countriesApi+"/"+countryId,CountryDTO.class);
+        return restTemplate.getForEntity(api + "/" + countryId, CountryDTO.class);
     }
 
     @Override
-    public ResponseEntity<List<CountryDTO>> findAllCountries() {
-        return restTemplate.getForEntity(ApiConstants.countriesApi)
+    public ResponseEntity<CountryDTO[]> findAllCountries() {
+        return restTemplate.getForEntity(api, CountryDTO[].class);
     }
 
     @Override
     public ResponseEntity<Object> saveCountry(CountryDTO countryDTO) {
-        return null;
+        return restTemplate.postForEntity(api, countryDTO, Object.class);
     }
 
     @Override
     public ResponseEntity<Object> updateCountry(CountryDTO countryDTO) {
-        return null;
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<CountryDTO> httpEntity = new HttpEntity<>(countryDTO, headers);
+        return restTemplate.exchange(api, HttpMethod.PUT, httpEntity, Object.class);
     }
 
     @Override
     public ResponseEntity<Object> deleteCountry(Long countryId) {
-        return null;
+        return restTemplate.exchange(api + "/" + countryId, HttpMethod.DELETE, null, Object.class);
     }
 }

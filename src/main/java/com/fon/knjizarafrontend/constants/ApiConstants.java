@@ -1,6 +1,18 @@
 package com.fon.knjizarafrontend.constants;
 
 public class ApiConstants {
-    private static String apiBase="http://localhost/api/v0/";
-    public static String countriesApi=apiBase+"countries";
+    private static final String apiBase = "http://localhost:9090/api/v0/";
+    public static final String countriesApi = apiBase + "countries";
+    public static final String authorsApi = apiBase + "authors";
+    public static final String basketEntriesApi = apiBase + "basketEntries";
+    public static final String basketsApi = apiBase + "baskets";
+    public static final String bookImagesApi = apiBase + "bookImages";
+    public static final String booksApi = apiBase + "books";
+    public static final String citiesApi = apiBase + "cities";
+    public static final String commentsApi = apiBase + "comments";
+    public static final String genresApi = apiBase + "genres";
+    public static final String reservationsApi = apiBase + "reservations";
+    public static final String storeImagesApi = apiBase + "storeImages";
+    public static final String storesApi = apiBase + "stores";
+    public static final String usersApi = apiBase + "users";
 }
