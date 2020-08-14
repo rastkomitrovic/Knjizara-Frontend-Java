@@ -16,8 +16,8 @@ public class BasketServiceImpl implements BasketService {
     private final String api = ApiConstants.basketsApi;
 
     @Override
-    public ResponseEntity<BasketDTO> findBasketByBasketId(long basketId) {
-        return restTemplate.getForEntity(api + "/" + basketId, BasketDTO.class);
+    public ResponseEntity<BasketDTO> findBasketByUserUsername(String username) {
+        return restTemplate.getForEntity(api + "/" + username, BasketDTO.class);
     }
 
     @Override

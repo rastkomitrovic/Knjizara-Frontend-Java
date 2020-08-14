@@ -66,4 +66,9 @@ public class BookServiceImpl implements BookService {
     public ResponseEntity<Object> deleteBook(long bookId) {
         return restTemplate.exchange(api + "/" + bookId, HttpMethod.DELETE, null, Object.class);
     }
+
+    @Override
+    public ResponseEntity<BookDTO[]> getAllBooksBestReviews() {
+        return restTemplate.getForEntity(api+"/bestReviews", BookDTO[].class);
+    }
 }

@@ -2,15 +2,18 @@ package com.fon.knjizarafrontend.entity;
 
 import lombok.Data;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "authorities")
 @Data
 public class Authority {
 
-    @EmbeddedId
-    private AuthorityEmbedded authorityEmbedded;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "username", nullable = false)
+    private String username;
+
+    @Column(name = "authority", nullable = false)
+    private String authority;
 }

@@ -4,7 +4,7 @@ import com.fon.knjizarafrontend.dto.BasketDTO;
 import org.springframework.http.ResponseEntity;
 
 public interface BasketService {
-    ResponseEntity<BasketDTO> findBasketByBasketId(long basketId);
+    ResponseEntity<BasketDTO> findBasketByUserUsername(String username);
 
     ResponseEntity<Object> saveBasket(BasketDTO basketDTO);
 

@@ -21,4 +21,6 @@ public interface BookService {
     ResponseEntity<Object> updateBook(BookDTO bookDTO);
 
     ResponseEntity<Object> deleteBook(long bookId);
+
+    ResponseEntity<BookDTO[]> getAllBooksBestReviews();
 }

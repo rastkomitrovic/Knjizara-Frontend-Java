@@ -19,6 +19,4 @@ public class UserSecurity {
     @Column(name = "enabled", nullable = false)
     private int enabled;
 
-    @Column(name = "email", nullable = false)
-    private String email;
 }
