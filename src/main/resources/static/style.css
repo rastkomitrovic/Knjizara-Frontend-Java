@@ -1,0 +1,22 @@
+.header{
+    height: 10%;
+    margin-left: 15%;
+    margin-right: 15%;
+    justify-self: center;
+}
+.center{
+    height: 80%;
+    margin-left: 15%;
+    margin-right: 15%;
+    justify-self: center;
+}
+
+.footer{
+    height: 10%;
+    margin-left: 15%;
+    margin-right: 15%;
+    justify-self: center;
+    vertical-align: center;
+    horiz-align: center;
+    background-color: #59595f;
+}
