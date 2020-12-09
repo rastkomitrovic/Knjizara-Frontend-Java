@@ -2,12 +2,16 @@ package com.fon.knjizarafrontend.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fon.knjizarafrontend.auth.CustomAuthority;
+import com.fon.knjizarafrontend.auth.CustomUserDetails;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -34,4 +38,10 @@ public class UserDTO {
     private Date dateOfBirth;
     @JsonProperty("city")
     private CityDTO city;
+    @JsonProperty("role")
+    private String role;
+
+    public CustomUserDetails toCustomUserDetails(){
+        return new CustomUserDetails(username,password,name,lastName,email,phone,address,dateOfBirth,city,new CustomAuthority(role));
+    }
 }

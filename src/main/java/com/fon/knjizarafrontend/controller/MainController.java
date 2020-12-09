@@ -1,4 +1,4 @@
-package com.fon.knjizarafrontend;
+package com.fon.knjizarafrontend.controller;
 
 import com.fon.knjizarafrontend.dto.BasketDTO;
 import com.fon.knjizarafrontend.dto.BookDTO;
@@ -13,13 +13,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.LinkedList;
 
 @Controller
-
 public class MainController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class MainController {
     @Autowired
     private BasketService basketService;
 
-    @GetMapping(value = "/hello")
+    @RequestMapping(value = "/mainPage")
     public String helloPage(Model model, Principal principal) {
         ResponseEntity<BookDTO[]> bookDtoResponse=bookService.getAllBooksBestReviews();
         ResponseEntity<UserDTO> userDtoResponse=userService.findUserByUsername(principal.getName());
@@ -43,9 +43,13 @@ public class MainController {
             model.addAttribute("user",userDtoResponse.getBody());
             model.addAttribute("basket",basketDTOResponseEntity.getBody());
         }
+
         return "index";
     }
+
 }
+
+
 /*
 String response= restTemplate.getForObject("http://localhost:9090/api/v0/countries", String.class );
 
