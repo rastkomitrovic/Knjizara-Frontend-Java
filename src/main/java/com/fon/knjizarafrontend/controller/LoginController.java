@@ -1,5 +1,7 @@
 package com.fon.knjizarafrontend.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fon.knjizarafrontend.auth.BookStoreAuthenticationProvider;
 import com.fon.knjizarafrontend.dto.CityDTO;
 import com.fon.knjizarafrontend.dto.UserDTO;
@@ -38,24 +40,28 @@ public class LoginController {
 
 
     @RequestMapping("/loginFailed")
-    public String errorLogin(Model model){
+    public String errorLogin(Model model) throws JsonProcessingException {
         LoginUser loginUser=new LoginUser();
         model.addAttribute("user",loginUser);
+        ObjectMapper objectMapper=new ObjectMapper();
+        model.addAttribute("userJSON",objectMapper.writeValueAsString(loginUser));
         model.addAttribute("message","Ne postoji korisnik sa unetim kredencijalima");
         return "loginPage";
     }
 
     @RequestMapping("/logoutSuccess")
     public String logout(Model model){
-        LoginUser loginUser=new LoginUser();
+        LoginUser loginUser=new LoginUser("a", "");
         model.addAttribute("user",loginUser);
         model.addAttribute("message","Uspesno ste se izlogovali");
         return "loginPage";
     }
     @RequestMapping("/login")
-    public String getLoginPage(Model model) throws ParseException {
+    public String getLoginPage(Model model) throws JsonProcessingException {
         LoginUser loginUser=new LoginUser();
         model.addAttribute("user",loginUser);
+        ObjectMapper objectMapper=new ObjectMapper();
+        model.addAttribute("userJSON",objectMapper.writeValueAsString(loginUser));
         return "loginPage";
     }
 

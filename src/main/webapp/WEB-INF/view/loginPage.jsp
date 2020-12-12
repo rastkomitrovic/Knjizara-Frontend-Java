@@ -12,19 +12,22 @@
 <head>
     <title>Login stranica</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
+
 </head>
 <body>
 <form:form action="${pageContext.request.contextPath}/performLogin" modelAttribute="user" method="POST">
-    Korisnicko ime <form:input path="username"/>
-    <form:errors path="username" cssClass="loginErrorMessage"/>
+    Korisnicko ime <form:input path="username" id="username"/>
     <br><br>
-    Sifra <form:password showPassword="true" path="password"/>
-    <form:errors path="password" cssClass="loginErrorMessage"/>
-    <input type="submit" value="Uloguj se">
+    Sifra <form:password showPassword="true" path="password" id="password"/>
+    <button type="submit" disabled id="loginButton">Uloguj se</button>
 </form:form>
 <c:if test="${message ne null}">
     <p class="loginErrorMessage">${message}</p>
 </c:if>
-<script src="${pageContext.request.contextPath}/js/LoginScript.js"></script>
+<script>
+    let user = ${userJSON};
+</script>
+<script type="application/javascript" lang="javascript" src="${pageContext.request.contextPath}/js/LoginScript.js"></script>
 </body>
+
 </html>
