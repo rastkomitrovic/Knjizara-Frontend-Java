@@ -10,23 +10,29 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Login stranica</title>
+    <title>Login</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
 
 </head>
 <body>
-<form:form action="${pageContext.request.contextPath}/performLogin" modelAttribute="user" method="POST">
-    Korisnicko ime <form:input path="username" id="username"/>
+<form:form action="${pageContext.request.contextPath}/performLogin" modelAttribute="user" method="POST" onsubmit="return check()">
+    <label for="username">Korisnicko ime</label>
+    <form:input path="username" id="username"/>
     <br><br>
-    Sifra <form:password showPassword="true" path="password" id="password"/>
-    <button type="submit" disabled id="loginButton">Uloguj se</button>
+    <label for="password">Lozinka</label>
+    <form:password showPassword="true" path="password" id="password"/>
+    <button type="submit" id="loginButton">Uloguj se</button>
+    <br><br>
 </form:form>
-<c:if test="${message ne null}">
-    <p class="loginErrorMessage">${message}</p>
-</c:if>
-<script>
-    let user = ${userJSON};
-</script>
+
+<a href="${pageContext.request.contextPath}/newUser">Nov korisnik? Registrujte se!</a>
+
+<label id="errorMessage" class="loginErrorMessage">
+    <c:if test="${message ne null}">
+        <p>${message}</p>
+    </c:if>
+</label>
+
 <script type="application/javascript" lang="javascript" src="${pageContext.request.contextPath}/js/LoginScript.js"></script>
 </body>
 

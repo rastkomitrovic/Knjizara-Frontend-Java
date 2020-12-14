@@ -38,30 +38,26 @@ public class LoginController {
     @Autowired
     private BookStoreAuthenticationProvider bookStoreAuthenticationProvider;
 
-
     @RequestMapping("/loginFailed")
     public String errorLogin(Model model) throws JsonProcessingException {
         LoginUser loginUser=new LoginUser();
         model.addAttribute("user",loginUser);
-        ObjectMapper objectMapper=new ObjectMapper();
-        model.addAttribute("userJSON",objectMapper.writeValueAsString(loginUser));
         model.addAttribute("message","Ne postoji korisnik sa unetim kredencijalima");
         return "loginPage";
     }
 
     @RequestMapping("/logoutSuccess")
-    public String logout(Model model){
-        LoginUser loginUser=new LoginUser("a", "");
+    public String logout(Model model) throws JsonProcessingException {
+        LoginUser loginUser=new LoginUser("", "");
         model.addAttribute("user",loginUser);
-        model.addAttribute("message","Uspesno ste se izlogovali");
+        ObjectMapper objectMapper=new ObjectMapper();
         return "loginPage";
     }
     @RequestMapping("/login")
-    public String getLoginPage(Model model) throws JsonProcessingException {
-        LoginUser loginUser=new LoginUser();
+    public String getLoginPage(Model model) throws JsonProcessingException, ParseException {
+        LoginUser loginUser=new LoginUser("rastko", "rastko");
         model.addAttribute("user",loginUser);
-        ObjectMapper objectMapper=new ObjectMapper();
-        model.addAttribute("userJSON",objectMapper.writeValueAsString(loginUser));
+
         return "loginPage";
     }
 

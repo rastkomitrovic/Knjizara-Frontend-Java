@@ -10,7 +10,6 @@ import org.jetbrains.annotations.TestOnly;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class CityDTO {
     @JsonProperty("cityId")
     private Long cityId;
@@ -22,4 +21,9 @@ public class CityDTO {
     private String description;
     @JsonProperty("country")
     private CountryDTO country;
+
+    @Override
+    public String toString() {
+        return cityName;
+    }
 }

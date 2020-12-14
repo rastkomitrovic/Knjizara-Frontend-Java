@@ -1,3 +1,73 @@
+html{
+    font-size: 62.5%;
+}
+
 .loginErrorMessage{
     color: red;
 }
+
+.navigation{
+    height: 6vh;
+    display: flex;
+    width: 80vw;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #457b9d ;
+}
+.navigation > li > a {
+    color: white;
+}
+.navigation-left{
+    display: flex;
+    text-decoration: none;
+    list-style: none;
+    align-items: center;
+    min-height: 100%;
+    max-height: 100%;
+}
+
+.navigation-right{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    max-height: 100%;
+}
+
+.navigation-element{
+    margin: 1rem 1rem;
+}
+
+.navigation-user-dropdown{
+    display: none;
+    position: absolute;
+    left: 0rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    min-width: 10rem;
+}
+.navigation-user-dropdown > i {
+    display: block;
+    font-size: 2.5rem;
+    top: -2px;
+    margin: 0 auto;
+}
+.toggle {
+    position: relative;
+    background-color: #1d3557;
+    font-size: 2.5rem;
+    border: none;
+    color: white;
+    height: 6vh;
+    padding: 0 3rem;
+    min-height: 100%;
+    max-height: 100%;
+
+}
+
+.navigation-right:hover .navigation-user-dropdown {
+    display: block;
+}
+
