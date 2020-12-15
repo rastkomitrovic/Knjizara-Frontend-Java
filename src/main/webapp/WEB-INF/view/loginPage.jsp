@@ -14,26 +14,35 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
 
 </head>
-<body>
-<form:form action="${pageContext.request.contextPath}/performLogin" modelAttribute="user" method="POST" onsubmit="return check()">
-    <label for="username">Korisnicko ime</label>
-    <form:input path="username" id="username"/>
-    <br><br>
-    <label for="password">Lozinka</label>
-    <form:password showPassword="true" path="password" id="password"/>
-    <button type="submit" id="loginButton">Uloguj se</button>
-    <br><br>
-</form:form>
+<body class="login-body">
+<div class="login-page">
+    <form:form action="${pageContext.request.contextPath}/performLogin" modelAttribute="user" method="POST"
+               onsubmit="return check()">
+        <div class="form-control">
+            <label for="username">Korisnicko ime:</label>
+            <form:input path="username" id="username"/>
+        </div>
+        <div class="form-control">
+            <label for="password">Lozinka:</label>
+            <form:password showPassword="true" path="password" id="password"/>
+        </div>
+        <button class="login-btn" type="submit" id="loginButton">Uloguj se</button>
+        <a href="${pageContext.request.contextPath}/newUser">
+            <button type="button" class="register-btn">Novi korisnik? Registruj se</button>
+        </a>
+    </form:form>
 
-<a href="${pageContext.request.contextPath}/newUser">Nov korisnik? Registrujte se!</a>
 
-<label id="errorMessage" class="loginErrorMessage">
-    <c:if test="${message ne null}">
-        <p>${message}</p>
-    </c:if>
-</label>
+    <label id="errorMessage" class="loginErrorMessage">
+        <c:if test="${message ne null}">
+            <p>${message}</p>
+        </c:if>
+    </label>
 
-<script type="application/javascript" lang="javascript" src="${pageContext.request.contextPath}/js/LoginScript.js"></script>
+</div>
+
+<script type="application/javascript" lang="javascript"
+        src="${pageContext.request.contextPath}/js/LoginScript.js"></script>
 </body>
 
 </html>

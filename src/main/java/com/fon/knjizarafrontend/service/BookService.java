@@ -14,7 +14,7 @@ public interface BookService {
 
     ResponseEntity<RestPageImpl<BookDTO>> findBooksPagingSearch(int page, int size, String sort, String param);
 
-    ResponseEntity<RestPageImpl<BookDTO>> findBooksByAuthor(AuthorDTO authorDTO, int page, int size, String sort);
+    ResponseEntity<RestPageImpl<BookDTO>> findBooksByAuthor(Long authorId, int page, int size, String sort);
 
     ResponseEntity<Object> saveBook(BookDTO bookDTO);
 

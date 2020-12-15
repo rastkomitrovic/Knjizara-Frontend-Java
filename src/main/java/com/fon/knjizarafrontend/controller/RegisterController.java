@@ -5,7 +5,6 @@ import com.fon.knjizarafrontend.dto.UserDTO;
 import com.fon.knjizarafrontend.editor.CityEditor;
 import com.fon.knjizarafrontend.service.CityService;
 import com.fon.knjizarafrontend.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,49 +15,50 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
 @Controller
 public class RegisterController {
-    @Autowired
+    @Resource
     private UserService userService;
 
-    @Autowired
+    @Resource
     private CityService cityService;
 
-    @Autowired
+    @Resource
     private CityEditor cityEditor;
 
-    @Autowired
+    @Resource
     private PasswordEncoder passwordEncoder;
 
     @InitBinder
-    public void initBinder(WebDataBinder binder){
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.setLenient(false);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf,false));
-        binder.registerCustomEditor(CityDTO.class,this.cityEditor);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, false));
+        binder.registerCustomEditor(CityDTO.class, this.cityEditor);
     }
 
     @RequestMapping("/newUser")
-    public String register(Model model){
-        model.addAttribute("user",new UserDTO());
-        ResponseEntity<CityDTO[]> responseEntity=cityService.findAllCities();
-        if(responseEntity.getStatusCode()== HttpStatus.OK)
+    public String register(Model model) {
+        model.addAttribute("user", new UserDTO());
+        ResponseEntity<CityDTO[]> responseEntity = cityService.findAllCities();
+        if (responseEntity.getStatusCode() == HttpStatus.OK)
             model.addAttribute("cities", Arrays.asList(responseEntity.getBody()));
         return "registration";
     }
 
-    @PostMapping(value = "/register" , consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String register(UserDTO user, Model model){
+    @PostMapping(value = "/register", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String register(UserDTO user, Model model) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole("USER");
-        ResponseEntity<Object> responseEntity=userService.saveUser(user);
-        if(responseEntity.getStatusCode()==HttpStatus.FOUND){
-            model.addAttribute("user",user);
-            model.addAttribute("errorMessage","Vec postoji korisnik sa tim korisnickim imenom");
+        ResponseEntity<Object> responseEntity = userService.saveUser(user);
+        if (responseEntity.getStatusCode() == HttpStatus.FOUND) {
+            model.addAttribute("user", user);
+            model.addAttribute("errorMessage", "Vec postoji korisnik sa tim korisnickim imenom");
             user.setPassword("");
             return "registration";
         }

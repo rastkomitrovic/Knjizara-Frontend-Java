@@ -4,15 +4,17 @@ import com.fon.knjizarafrontend.constants.ApiConstants;
 import com.fon.knjizarafrontend.constants.RestPageImpl;
 import com.fon.knjizarafrontend.dto.ReservationDTO;
 import com.fon.knjizarafrontend.service.ReservationService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.Resource;
+
 @Service
 public class ReservationServiceImpl implements ReservationService {
-    @Autowired
+
+    @Resource
     private RestTemplate restTemplate;
 
     private final String api = ApiConstants.reservationsApi;

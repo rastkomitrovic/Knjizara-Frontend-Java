@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 public class LoginUser {
 
     @NotNull(message = "Obavezno polje")
-    @Size(min = 2,message = "Korisnicko ime mora sadrzati barem 2 karaktera")
+    @Size(min = 2, message = "Korisnicko ime mora sadrzati barem 2 karaktera")
     private String username;
 
     @NotNull(message = "Obavezno polje")

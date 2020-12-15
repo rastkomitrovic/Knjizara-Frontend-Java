@@ -2,18 +2,19 @@ package com.fon.knjizarafrontend.service.impl;
 
 import com.fon.knjizarafrontend.constants.ApiConstants;
 import com.fon.knjizarafrontend.constants.RestPageImpl;
-import com.fon.knjizarafrontend.dto.AuthorDTO;
 import com.fon.knjizarafrontend.dto.BookDTO;
 import com.fon.knjizarafrontend.service.BookService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.Resource;
+
 @Service
 public class BookServiceImpl implements BookService {
-    @Autowired
+
+    @Resource
     private RestTemplate restTemplate;
 
     private final String api = ApiConstants.booksApi;
@@ -43,10 +44,10 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public ResponseEntity<RestPageImpl<BookDTO>> findBooksByAuthor(AuthorDTO authorDTO, int page, int size, String sort) {
+    public ResponseEntity<RestPageImpl<BookDTO>> findBooksByAuthor(Long authorId, int page, int size, String sort) {
         ParameterizedTypeReference<RestPageImpl<BookDTO>> responseType = new ParameterizedTypeReference<RestPageImpl<BookDTO>>() {
         };
-        return restTemplate.exchange(api + "/authorSearch/" + page + "/" + size + "/" + sort, HttpMethod.GET, null, responseType);
+        return restTemplate.exchange(api + "/authorSearch/"+authorId+"/+" + page + "/" + size + "/" + sort, HttpMethod.GET, null, responseType);
     }
 
     @Override
@@ -69,6 +70,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public ResponseEntity<BookDTO[]> getAllBooksBestReviews() {
-        return restTemplate.getForEntity(api+"/bestReviews", BookDTO[].class);
+        return restTemplate.getForEntity(api+"/top10", BookDTO[].class);
     }
 }

@@ -2,7 +2,6 @@ package com.fon.knjizarafrontend.controller;
 
 import com.fon.knjizarafrontend.dto.BookDTO;
 import com.fon.knjizarafrontend.service.BookService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,10 +18,10 @@ public class ProductDetailPageController {
     private BookService bookService;
 
     @RequestMapping("/p/{bookId}")
-    private String productDetailPage(@PathVariable("bookId") long bookId, Model model){
-        ResponseEntity<BookDTO> response=bookService.findBookByBookId(bookId);
-        if(response.getStatusCode()== HttpStatus.OK){
-            BookDTO book=response.getBody();
+    private String productDetailPage(@PathVariable("bookId") long bookId, Model model) {
+        ResponseEntity<BookDTO> response = bookService.findBookByBookId(bookId);
+        if (response.getStatusCode() == HttpStatus.OK) {
+            BookDTO book = response.getBody();
             model.addAttribute(book);
             return "productDetailPage";
         }

@@ -1,20 +1,16 @@
 package com.fon.knjizarafrontend.controller;
 
-import com.fon.knjizarafrontend.dto.BasketDTO;
 import com.fon.knjizarafrontend.dto.BookDTO;
-import com.fon.knjizarafrontend.dto.UserDTO;
 import com.fon.knjizarafrontend.service.BasketService;
 import com.fon.knjizarafrontend.service.BookService;
 import com.fon.knjizarafrontend.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.Resource;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -22,26 +18,21 @@ import java.util.LinkedList;
 @Controller
 public class MainController {
 
-    @Autowired
+    @Resource
     private BookService bookService;
 
-    @Autowired
+    @Resource
     private UserService userService;
 
-    @Autowired
+    @Resource
     private BasketService basketService;
 
     @RequestMapping(value = "/mainPage")
     public String helloPage(Model model, Principal principal) {
-        ResponseEntity<BookDTO[]> bookDtoResponse=bookService.getAllBooksBestReviews();
-        ResponseEntity<UserDTO> userDtoResponse=userService.findUserByUsername(principal.getName());
-        ResponseEntity<BasketDTO> basketDTOResponseEntity=basketService.findBasketByUserUsername(principal.getName());
-
-        if(bookDtoResponse.getStatusCode().equals(HttpStatus.OK) && userDtoResponse.getStatusCode().equals(HttpStatus.OK)) {
-            model.addAttribute("bestReviewBooks",
-                    bookDtoResponse.getBody()==null ? new LinkedList<>() : Arrays.asList(bookDtoResponse.getBody()));
-            model.addAttribute("user",userDtoResponse.getBody());
-            model.addAttribute("basket",basketDTOResponseEntity.getBody());
+        ResponseEntity<BookDTO[]> bookDtoResponse = bookService.getAllBooksBestReviews();
+        if (bookDtoResponse.getStatusCode().equals(HttpStatus.OK)) {
+            model.addAttribute("books",
+                    bookDtoResponse.getBody() == null ? new LinkedList<>() : Arrays.asList(bookDtoResponse.getBody()));
         }
 
         return "index";

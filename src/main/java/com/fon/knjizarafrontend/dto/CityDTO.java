@@ -19,8 +19,6 @@ public class CityDTO {
     private String postalCode;
     @JsonProperty("description")
     private String description;
-    @JsonProperty("country")
-    private CountryDTO country;
 
     @Override
     public String toString() {

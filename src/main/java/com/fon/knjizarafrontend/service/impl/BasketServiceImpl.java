@@ -3,14 +3,16 @@ package com.fon.knjizarafrontend.service.impl;
 import com.fon.knjizarafrontend.constants.ApiConstants;
 import com.fon.knjizarafrontend.dto.BasketDTO;
 import com.fon.knjizarafrontend.service.BasketService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.Resource;
+
 @Service
 public class BasketServiceImpl implements BasketService {
-    @Autowired
+
+    @Resource
     private RestTemplate restTemplate;
 
     private final String api = ApiConstants.basketsApi;

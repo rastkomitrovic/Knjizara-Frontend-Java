@@ -13,51 +13,78 @@
     <title>Registracija</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
 </head>
-<body>
-    <form:form action="${pageContext.request.contextPath}/register" modelAttribute="user" method="POST" onsubmit="return check()">
-        <label for="username">Korisnicko ime</label>
-        <form:input path="username" id="username"/>
+<body class="login-body">
+<form:form cssClass="login-page" action="${pageContext.request.contextPath}/register" modelAttribute="user"
+           method="POST" onsubmit="return check()">
+    <div id="form-section-1">
+        <div class="form-control">
+            <label for="username">Korisnicko ime:</label>
+            <form:input path="username" id="username"/>
+        </div>
         <p id="errorUsername"></p>
-        <br><br>
-        <label for="password">Lozinka</label>
-        <form:password path="password" showPassword="true" id="password" />
+        <div class="form-control">
+            <label for="password">Lozinka:</label>
+            <form:password path="password" showPassword="true" id="password"/>
+        </div>
         <p id="errorPassword"></p>
-        <br><br>
-        <label for="repeatPassword">Ponovite lozinku</label>
-        <input type="password" id="repeatPassword"/>
+        <div class="form-control">
+            <label for="repeatPassword">Ponovite lozinku:</label>
+            <input type="password" id="repeatPassword"/>
+        </div>
         <p id="errorRepeatPassword"></p>
-        <br><br>
-        <label for="name" >Ime</label>
-        <form:input path="name" id="name"/>
+        <button type="button" onclick="showNext(2)" class="next-btn first-btn">Sledeće</button>
+    </div>
+    <div id="form-section-2">
+        <div class="form-control">
+            <label for="name">Ime:</label>
+            <form:input path="name" id="name"/>
+        </div>
         <p id="errorName"></p>
-        <br><br>
-        <label for="lastName">Prezime</label>
-        <form:input path="lastName" id="lastName"/>
+        <div class="form-control">
+            <label for="lastName">Prezime:</label>
+            <form:input path="lastName" id="lastName"/>
+        </div>
         <p id="errorLastName"></p>
-        <br><br>
-        <label for="email">Email</label>
-        <form:input path="email"/>
+        <div class="form-control">
+            <label for="email">Email:</label>
+            <form:input path="email"/>
+        </div>
         <p id="errorEmail"></p>
-        <br><br>
-        <label for="phone">Telefon</label>
-        <form:input path="phone"/>
+        <div class="form-buttons">
+            <button type="button" onclick="showNext(1)" class="previous-btn">Prethodno</button>
+            <button type="button" onclick="showNext(3)" class="next-btn">Sledeće</button>
+        </div>
+    </div>
+    <div id="form-section-3">
+        <div class="form-control">
+            <label for="phone">Telefon:</label>
+            <form:input path="phone"/>
+        </div>
         <p id="errorPhone"></p>
-        <br><br>
-        <label for="address">Adresa</label>
-        <form:input path="address"/>
+        <div class="form-control">
+            <label for="address">Adresa:</label>
+            <form:input path="address"/>
+        </div>
         <p id="errorAddress"></p>
-        <br><br>
-        <label for="dateOfBirth">Datum rodjenja</label>
-        <form:input type="date" path="dateOfBirth" cssClass="date-picker"/>
+        <div class="form-control">
+            <label for="dateOfBirth">Datum rodjenja:</label>
+            <form:input type="date" path="dateOfBirth" cssClass="date-picker"/>
+        </div>
         <p id="errorDateOfBirth"></p>
-        <br><br>
-        <label for="city">Grad</label>
-        <form:select path="city" items="${cities}" itemLabel="cityName" itemValue="cityId"/>
-        <form:button type="submit">Registruj se</form:button>
-    </form:form>
-    <c:if test="${errorMessage ne null}">
-        <p>${errorMessage}</p>
-    </c:if>
-    <script src="${pageContext.request.contextPath}/js/RegisterScript.js"></script>
+        <div class="form-control">
+            <label for="city">Grad:</label>
+            <form:select cssClass="" path="city" items="${cities}" itemLabel="cityName" itemValue="cityId"/>
+        </div>
+        <div class="form-buttons">
+            <button type="button" onclick="showNext(2)" class="previous-btn">Prethodno</button>
+            <form:button type="submit" class="register-form-btn">Registruj se</form:button>
+        </div>
+
+    </div>
+</form:form>
+<c:if test="${errorMessage ne null}">
+    <p>${errorMessage}</p>
+</c:if>
+<script src="${pageContext.request.contextPath}/js/RegisterScript.js"></script>
 </body>
 </html>

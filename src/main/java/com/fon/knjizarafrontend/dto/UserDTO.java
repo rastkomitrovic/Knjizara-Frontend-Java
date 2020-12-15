@@ -41,7 +41,7 @@ public class UserDTO {
     @JsonProperty("role")
     private String role;
 
-    public CustomUserDetails toCustomUserDetails(){
-        return new CustomUserDetails(username,password,name,lastName,email,phone,address,dateOfBirth,city,new CustomAuthority(role));
+    public CustomUserDetails toCustomUserDetails() {
+        return new CustomUserDetails(username, password, name, lastName, email, phone, address, dateOfBirth, city, new CustomAuthority(role));
     }
 }

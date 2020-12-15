@@ -15,4 +15,5 @@ public class ApiConstants {
     public static final String storeImagesApi = apiBase + "storeImages";
     public static final String storesApi = apiBase + "stores";
     public static final String usersApi = apiBase + "users";
+    public static final String publishersApi = apiBase + "publishers";
 }

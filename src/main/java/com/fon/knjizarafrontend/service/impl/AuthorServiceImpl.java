@@ -4,15 +4,17 @@ import com.fon.knjizarafrontend.constants.ApiConstants;
 import com.fon.knjizarafrontend.constants.RestPageImpl;
 import com.fon.knjizarafrontend.dto.AuthorDTO;
 import com.fon.knjizarafrontend.service.AuthorService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.Resource;
+
 @Service
 public class AuthorServiceImpl implements AuthorService {
-    @Autowired
+
+    @Resource
     private RestTemplate restTemplate;
 
     private final String api = ApiConstants.authorsApi;

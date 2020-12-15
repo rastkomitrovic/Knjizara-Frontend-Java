@@ -44,29 +44,44 @@
 </nav>
 
 <section class="products-wrapper">
-    <c:forEach items="${books}" var="book">
-        <div class="product-card">
-            <c:if test="${book.images.size() ge 1}">
-                <img src="${book.images.get(0).imageUrl}" class="product-card-img"/>
-            </c:if>
-            <div class="product-card-name-review">
-                <h2 class="product-card-name">${book.bookName}</h2>
-                <p class="product-card-review"><i class="fa fa-star" aria-hidden="true"></i>${book.rating}</p>
-            </div>
-            <h4 class="product-card-author">
-                <c:forEach items="${book.authors}" var="author">
-                    <p>${author.firstName} &nbsp; ${author.middleName} &nbsp; ${author.lastName}</p>
-                    <br>
+    <c:choose>
+        <c:when test="${!isEmpty}">
+            <h1>Pronadjeno je ukupno: ${totalNumberOfFoundElements}</h1>
+            <c:forEach items="${books}" var="book">
+                <div class="product-card">
+                    <c:if test="${book.images.size() ge 1}">
+                        <img src="${book.images.get(0).imageUrl}" class="product-card-img"/>
+                    </c:if>
+                    <div class="product-card-name-review">
+                        <h2 class="product-card-name">${book.bookName}</h2>
+                        <p class="product-card-review"><i class="fa fa-star" aria-hidden="true"></i>${book.rating}</p>
+                    </div>
+                    <h4 class="product-card-author">
+                        <c:forEach items="${book.authors}" var="author">
+                            <p>${author.firstName} &nbsp; ${author.middleName} &nbsp; ${author.lastName}</p>
+                            <br>
+                        </c:forEach>
+                    </h4>
+                    <h6 class="product-card-isbn">${book.ISBN}</h6>
+                    <div class="product-card-price-details">
+                        <p class="product-card-price">${book.price}</p>
+                        <button class="product-card-details">Detalji</button>
+                    </div>
+                </div>
+            </c:forEach>
+            <div class="pages-navigation">
+                <p class="pages-navigation-heading">Stranice</p>
+                <br>
+                <c:forEach var="i" begin="1" end="${totalPages}">
+                    <a href="${pageContext.request.contextPath}/search/${i-1}/${size}/${sort}/${searchParam}">${i}</a>
                 </c:forEach>
-            </h4>
-            <h6 class="product-card-isbn">${book.ISBN}</h6>
-            <div class="product-card-price-details">
-                <p class="product-card-price">${book.price}</p>
-                <button class="product-card-details">Detalji</button>
             </div>
-        </div>
-    </c:forEach>
+        </c:when>
 
+        <c:otherwise>
+            <h1 class="no-books-found">Nije pronadjena nijedna knjiga po zadatom kriterijumu</h1>
+        </c:otherwise>
+    </c:choose>
 </section>
 
 

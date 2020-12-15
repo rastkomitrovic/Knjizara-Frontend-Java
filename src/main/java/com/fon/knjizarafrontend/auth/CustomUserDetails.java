@@ -26,9 +26,10 @@ public class CustomUserDetails implements UserDetails {
     private Date dateOfBirth;
     private CityDTO city;
     private CustomAuthority customAuthority;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<CustomAuthority> list=new LinkedList<>();
+        List<CustomAuthority> list = new LinkedList<>();
         list.add(customAuthority);
         return list;
     }
