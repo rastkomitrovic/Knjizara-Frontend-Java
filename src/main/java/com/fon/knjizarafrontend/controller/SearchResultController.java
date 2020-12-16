@@ -20,7 +20,7 @@ public class SearchResultController {
 
     @RequestMapping("/search/{page}/{size}/{sort}/{text}")
     private String searchResultPage(@PathVariable int page, @PathVariable int size, @PathVariable String sort, @PathVariable("text") String text, Model model) {
-        ResponseEntity<RestPageImpl<BookDTO>> response = bookService.findBooksPagingSearch(page, 12, sort, text);
+        ResponseEntity<RestPageImpl<BookDTO>> response = bookService.findBooksPagingSearch(page, size, sort, text);
         RestPageImpl<BookDTO> restPage = response.getBody();
         model.addAttribute("isEmpty", restPage.isEmpty());
         if (restPage.isEmpty()) {
@@ -28,13 +28,11 @@ public class SearchResultController {
         }
         model.addAttribute("searchParam", text);
         model.addAttribute("sort", sort);
-        model.addAttribute("size", size);
-
         model.addAttribute("totalNumberOfFoundElements", restPage.getTotalElements());
         model.addAttribute("isLastPage", restPage.isLast());
         model.addAttribute("isFirst", restPage.isFirst());
+        model.addAttribute("totalPages",restPage.getTotalPages());
         model.addAttribute("currentPage", restPage.getNumber());
-        model.addAttribute("totalPages", restPage.getTotalPages());
         model.addAttribute("books", restPage.getContent() != null ? restPage.getContent() : new LinkedList<>());
         return "searchResultPage";
     }

@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -43,10 +44,11 @@
 
 </nav>
 
-<section class="products-wrapper">
-    <c:choose>
-        <c:when test="${!isEmpty}">
-            <h1>Pronadjeno je ukupno: ${totalNumberOfFoundElements}</h1>
+
+<c:choose>
+    <c:when test="${!isEmpty}">
+        <h1>Pronadjeno je ukupno: ${totalNumberOfFoundElements}</h1>
+        <section class="products-wrapper">
             <c:forEach items="${books}" var="book">
                 <div class="product-card">
                     <c:if test="${book.images.size() ge 1}">
@@ -57,10 +59,11 @@
                         <p class="product-card-review"><i class="fa fa-star" aria-hidden="true"></i>${book.rating}</p>
                     </div>
                     <h4 class="product-card-author">
-                        <c:forEach items="${book.authors}" var="author">
-                            <p>${author.firstName} &nbsp; ${author.middleName} &nbsp; ${author.lastName}</p>
-                            <br>
-                        </c:forEach>
+                        <p>${book.authors.get(0).firstName} ${book.authors.get(0).middleName} ${book.authors.get(0).lastName}
+                        <c:if test="${book.authors.size()>1}">
+                            i drugi
+                        </c:if>
+                        </p>
                     </h4>
                     <h6 class="product-card-isbn">${book.ISBN}</h6>
                     <div class="product-card-price-details">
@@ -69,23 +72,37 @@
                     </div>
                 </div>
             </c:forEach>
-            <div class="pages-navigation">
-                <p class="pages-navigation-heading">Stranice</p>
-                <br>
-                <c:forEach var="i" begin="1" end="${totalPages}">
-                    <a href="${pageContext.request.contextPath}/search/${i-1}/${size}/${sort}/${searchParam}">${i}</a>
-                </c:forEach>
-            </div>
-        </c:when>
+        </section>
+        <div class="pages-navigation">
+            <form:form onsubmit="return checkPrevious()" style="display: inline" action="${pageContext.request.contextPath}/search/${currentPage-1}/${size}/${sort}/${searchParam}" method="get">
+                <button type="submit" class="results-prevnext-btn"><i class="fa fa-chevron-left" id="previous-btn"></i></button>
+            </form:form>
+            <c:forEach var="i" begin="1" end="${totalPages}">
+                <form:form onsubmit="return checkCurrent(${i-1})" style="display: inline" action="${pageContext.request.contextPath}/search/${i-1}/${size}/${sort}/${searchParam}" method="get">
+                    <button type="submit" class="results-nav-btn">
+                            ${i}
+                    </button>
+                </form:form>
+            </c:forEach>
+            <form:form onsubmit="return checkNext()" style="display: inline" action="${pageContext.request.contextPath}/search/${currentPage+1}/${size}/${sort}/${searchParam}" method="get">
+                <button type="submit" class="results-prevnext-btn" id="next-btn"><i class="fa fa-chevron-right"></i></button>
+            </form:form>
 
-        <c:otherwise>
-            <h1 class="no-books-found">Nije pronadjena nijedna knjiga po zadatom kriterijumu</h1>
-        </c:otherwise>
-    </c:choose>
-</section>
+        </div>
+    </c:when>
 
+    <c:otherwise>
+        <h1 class="no-books-found">Nije pronadjena nijedna knjiga po zadatom kriterijumu</h1>
+    </c:otherwise>
+</c:choose>
 
-<script src="${pageContext.request.contextPath}/js/MainPage.js"></script>
+<script>
+    const isFirst=${isFirst};
+    const isLast=${isLastPage};
+    const currentPage=${currentPage}
+
+</script>
+<script src="${pageContext.request.contextPath}/js/SearchResultPageScript.js"></script>
 </body>
 </html>
 
