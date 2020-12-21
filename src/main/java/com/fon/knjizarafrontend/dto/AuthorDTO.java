@@ -12,7 +12,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class AuthorDTO {
     @JsonProperty("authorId")
     private Long authorId;
@@ -28,4 +27,11 @@ public class AuthorDTO {
     private String description;
     @JsonProperty("books")
     private List<BookDTO> books;
+
+    @Override
+    public String toString() {
+        if(middleName!=null && middleName.length()>=1)
+            return firstName+" "+middleName+" "+lastName;
+        return firstName+" "+lastName;
+    }
 }

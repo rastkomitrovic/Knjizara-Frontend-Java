@@ -38,10 +38,13 @@
     </div>
     <div class="navigation-right">
         <div class="navigation-right-search">
-            <input type="text" placeholder="Pokušajte: Tolkin" >
+            <input type="text" id="search-field" placeholder="Pokušajte: Tolkin" >
             <button>
                 <i class="fa fa-search"></i>
             </button>
+            <div class="navigation-right-suggestions">
+
+            </div>
         </div>
         <button class="navigation-right-toggle">
             <i class="fa fa-user"></i>
@@ -56,8 +59,6 @@
             <a href="${pageContext.request.contextPath}/logout">
                 <i class="fa fa-arrow-right"></i> <p>Izloguj se</p>
             </a>
-
-
 
         </section>
     </div>

@@ -12,36 +12,57 @@
 
 <body class="index-body">
 <nav class="navigation">
-    <ul class="navigation-left">
-        <li class="navigation-element">
-            <a>Autori</a>
-        </li>
-        <li class="navigation-element">
-            <a>Knjige</a>
-        </li>
-        <li class="navigation-element">
-            <a>Žanrovi</a>
-        </li>
-        <li class="navigation-element">
-            <a>Prodavnice</a>
-        </li>
-        <li class="navigation-element">
-            <a>O nama</a>
-        </li>
-        <li class="navigation-element">
-            <a>Dodavanje korisnika</a>
-        </li>
-    </ul>
+    <div class="navigation-left">
+        <p>
+            <a href="${pageContext.request.contextPath}/mainPage">
+                <img style="height:6vh; width: 18vh;"src="${pageContext.request.contextPath}/img/logo.png"/>
+            </a>
+        </p>
+        <p class="navigation-element">
+            <a href="">Autori</a>
+        </p>
+        <p class="navigation-element">
+            <a href="">Knjige</a>
+        </p>
+        <p class="navigation-element">
+            <a href="">Žanrovi</a>
+        </p>
+        <p class="navigation-element">
+            <a href="">Prodavnice</a>
+        </p>
+        <p class="navigation-element">
+            <a href="">O nama</a>
+        </p>
+        <p class="navigation-element">
+            <a href="">Dodavanje korisnika</a>
+        </p>
+    </div>
     <div class="navigation-right">
-        <button class="toggle">
-            <i class="glyphicon glyphicon-user user-icon"></i>
+        <div class="navigation-right-search">
+            <input type="text" id="search-field" placeholder="Pokušajte: Tolkin" >
+            <button>
+                <i class="fa fa-search"></i>
+            </button>
+            <div class="navigation-right-suggestions">
+
+            </div>
+        </div>
+        <button class="navigation-right-toggle">
+            <i class="fa fa-user"></i>
         </button>
         <section class="navigation-user-dropdown">
-            <i class="glyphicon glyphicon-shopping-cart"></i>
-            <i class="glyphicon glyphicon-wrench"></i>
+            <a href="${pageContext.request.contextPath}/basket">
+                <i class="fa fa-shopping-cart"></i> <p>Korpa</p>
+            </a>
+            <a href="${pageContext.request.contextPath}/userProfile">
+                <i class="fa fa-wrench"></i> <p>Podešavanja</p>
+            </a>
+            <a href="${pageContext.request.contextPath}/logout">
+                <i class="fa fa-arrow-right"></i> <p>Izloguj se</p>
+            </a>
+
         </section>
     </div>
-
 </nav>
 
 

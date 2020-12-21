@@ -22,7 +22,7 @@ public class ProductDetailPageController {
         ResponseEntity<BookDTO> response = bookService.findBookByBookId(bookId);
         if (response.getStatusCode() == HttpStatus.OK) {
             BookDTO book = response.getBody();
-            model.addAttribute(book);
+            model.addAttribute("book",book);
             return "productDetailPage";
         }
         return "productNotFound";

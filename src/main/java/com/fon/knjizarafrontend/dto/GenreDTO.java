@@ -11,7 +11,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class GenreDTO {
     @JsonProperty("genreId")
     private Long genreId;
@@ -21,4 +20,9 @@ public class GenreDTO {
     private String description;
     @JsonProperty("books")
     private List<BookDTO> books;
+
+    @Override
+    public String toString() {
+        return genreName;
+    }
 }

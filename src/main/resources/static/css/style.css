@@ -120,7 +120,7 @@ html {
     margin: 0 auto;
     justify-content: space-between;
     align-items: center;
-    background-color: #457b9d;
+    background-color: var(--color-primary-lighter);
 }
 
 .navigation > li > a {
@@ -148,7 +148,7 @@ html {
 
 .navigation-element {
     padding: 1rem 1rem;
-    color: var(--color-navigation-element);
+    color: var(--color-grey-dark);
     font-size: 1.8rem;
 }
 
@@ -158,6 +158,10 @@ html {
 
 .navigation-element a {
     text-decoration: none;
+    color: var(--color-grey-dark);
+}
+
+.navigation-element a:hover {
     color: var(--color-navigation-element);
 }
 
@@ -165,7 +169,7 @@ html {
     display: flex;
     height: 100%;
     margin: 0;
-    padding: 1.5rem;
+    padding-right: 1.5rem;
 }
 
 .navigation-right-search input{
@@ -201,6 +205,57 @@ html {
     outline: none;
 }
 
+.navigation-right-suggestions{
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 6vh;
+    background-color: #fffae6;
+    max-width: 29rem;
+}
+
+.navigation-right-suggestions a{
+    text-decoration: none;
+}
+
+.navigation-right-single-suggestion{
+    display: flex;
+    justify-content: left;
+    cursor:pointer;
+    margin: 1.5rem;
+}
+
+.navigation-right-single-suggestion:hover{
+    background-color: var(--color-accent);
+}
+
+.navigation-right-single-suggestion:hover > .single-suggestion-info > .single-suggestion-info-book{
+    color: var(--color-navigation-element);
+}
+
+.navigation-right-single-suggestion:hover > .single-suggestion-info > .single-suggestion-info-name{
+    color: var(--color-navigation-element);
+}
+.single-suggestion-img{
+    max-width: 5rem;
+}
+
+.single-suggestion-info{
+    margin-left: 1rem;
+}
+
+.single-suggestion-info-book{
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--color-grey-dark);
+}
+
+.single-suggestion-info-name{
+    font-size: 1rem;
+    color: var(--color-grey)
+}
+
 .navigation-right-toggle {
     position: relative;
     background-color: #1d3557;
@@ -229,7 +284,7 @@ html {
     width: 15rem;
     padding: 1rem;
     background: rgb(29,53,87);
-    background: linear-gradient(90deg, rgba(29,53,87,.8) 0%, rgba(230,57,70,.8) 100%);
+    background: linear-gradient(90deg, rgba(29,53,87,.8) 0%, rgba(29,53,87,.8) 100%);
     text-align: center;
     margin-top: -1px;
 }
@@ -454,6 +509,207 @@ html {
 .results-prevnext-btn:hover{
     background-color: var(--color-accent);
     color: var(--color-secondary);
+}
+
+/********************************** product details page ************************************/
+
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+    width: 40%;
+}
+
+/* Hide the images by default */
+.mySlides {
+    display: none;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+    background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+.product-details{
+    display: flex;
+    min-height: 60vh;
+}
+
+.product-details-info{
+    width: 60%;
+    margin-left: 2rem;
+}
+
+.details-info-name{
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+.details-info-authors{
+    display: flex;
+    align-items: center;
+}
+
+.details-info-authors p {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+.details-info-author{
+    font-size: 1.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 1rem;
+}
+
+.details-info-genres{
+    display: flex;
+    align-items: center;
+}
+.details-info-genres p{
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+.details-info-genre{
+    font-size: 1.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 1rem;
+}
+
+.details-info-lang{
+    font-size: 1.5rem;
+}
+
+.details-info-about{
+    font-size: 1.2rem;
+}
+
+.details-info-rating{
+    font-size: 1.2rem;
+}
+
+.details-info-cta{
+    color: var(--color-secondary);
+    background-color: var(--color-accent);
+    padding: 1rem;
+    border: none;
+    font-size: 1.5rem;
+    border-radius: 5px;
+}
+
+.details-info-cta:hover{
+    cursor:pointer;
+    transform: scale(1.05);
+}
+
+.product-details-comments{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.details-single-comment{
+    background-color: var(--color-secondary);
+    -webkit-box-shadow: 15px 11px 59px -22px rgba(0,0,0,0.75);
+    -moz-box-shadow: 15px 11px 59px -22px rgba(0,0,0,0.75);
+    box-shadow: 15px 11px 59px -22px rgba(0,0,0,0.75);
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 2rem;
+    padding: 1rem 2rem 1rem 2rem;
+    min-width: calc(33% - 4rem);
+}
+
+.single-comment-user{
+    font-size: 1.6rem;
+}
+
+.single-comment-stars{
+    font-size: 1.5rem;
+    color: var(--color-accent)
+}
+
+.single-comment-review{
+    font-size: 1.2rem;
 }
 
 
