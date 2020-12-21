@@ -89,7 +89,9 @@
                     <h6 class="product-card-isbn">${book.ISBN}</h6>
                     <div class="product-card-price-details">
                         <p class="product-card-price">${book.price}</p>
-                        <button class="product-card-details">Detalji</button>
+                        <a href="${pageContext.request.contextPath}/p/${book.bookId}">
+                            <button class="product-card-details">Detalji</button>
+                        </a>
                     </div>
                 </div>
             </c:forEach>
@@ -116,6 +118,12 @@
         <h1 class="no-books-found">Nije pronadjena nijedna knjiga po zadatom kriterijumu</h1>
     </c:otherwise>
 </c:choose>
+
+<footer class="web-footer">
+    <i class="fa fa-instagram"></i>
+    <i class="fa fa-facebook"></i>
+    <i class="fa fa-linkedin"></i>
+</footer>
 
 <script>
     const isFirst=${isFirst};

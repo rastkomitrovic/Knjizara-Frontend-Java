@@ -516,8 +516,7 @@ html {
 .slideshow-container {
     max-width: 1000px;
     position: relative;
-    margin: auto;
-    width: 40%;
+    width: 25%;
 }
 
 /* Hide the images by default */
@@ -609,6 +608,8 @@ html {
 .product-details{
     display: flex;
     min-height: 60vh;
+    margin-top: 3rem;
+    justify-content: left;
 }
 
 .product-details-info{
@@ -626,7 +627,7 @@ html {
     align-items: center;
 }
 
-.details-info-authors p {
+.details-info-authors > p {
     font-size: 1.5rem;
     margin-right: 1rem;
 }
@@ -642,7 +643,7 @@ html {
     display: flex;
     align-items: center;
 }
-.details-info-genres p{
+.details-info-genres > p{
     font-size: 1.5rem;
     margin-right: 1rem;
 }
@@ -659,11 +660,33 @@ html {
 }
 
 .details-info-about{
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    max-width: 60rem;
 }
 
 .details-info-rating{
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+}
+
+.product-card-price-details a{
+    width: 100%;
+    text-align: right;
+}
+.quantity-label{
+    font-size: 1.5rem;
+}
+
+#input-quantity{
+    max-width: 4rem;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid black;
+    color: var(--color-accent);
+}
+
+#input-quantity:focus{
+    outline: none;
+    border: 1px solid var(--color-accent);
 }
 
 .details-info-cta{
@@ -673,6 +696,7 @@ html {
     border: none;
     font-size: 1.5rem;
     border-radius: 5px;
+    margin-top: 2rem;
 }
 
 .details-info-cta:hover{
@@ -684,7 +708,6 @@ html {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-around;
 }
 
 .details-single-comment{
@@ -696,7 +719,7 @@ html {
     margin-right: 1rem;
     margin-top: 2rem;
     padding: 1rem 2rem 1rem 2rem;
-    min-width: calc(33% - 4rem);
+    min-width: calc(33% - 2rem);
 }
 
 .single-comment-user{
@@ -710,6 +733,66 @@ html {
 
 .single-comment-review{
     font-size: 1.2rem;
+}
+
+.new-comment-form{
+    margin-top: 2rem;
+}
+.new-comment-label{
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.comment-review{
+    font-size: 1.5rem;
+    display: block;
+    margin-top: 1rem;
+}
+
+.comment-text{
+    font-size: 1.5rem;
+    display: block;
+}
+
+.comments-load-more{
+    border: 1px solid var(--color-accent);
+    padding: 1rem;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    color: var(--color-accent);
+    margin: 2rem auto 0 auto;
+    display: block;
+}
+
+.comments-load-more:hover{
+    background-color: var(--color-accent);
+    color: white;
+    cursor:pointer;
+}
+
+.comments-load-more:focus{
+    outline: none;
+}
+
+.web-footer{
+    background-color: var(--color-grey-dark);
+    color: var(--color-navigation-element);
+    min-height: 20rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+
+}
+
+.web-footer i {
+    font-size: 5rem;
+    padding: 2rem;
+}
+
+.web-footer i:hover{
+    cursor: pointer;
 }
 
 
