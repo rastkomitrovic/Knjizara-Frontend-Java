@@ -369,15 +369,59 @@ html {
     margin: 0 auto;
 }
 
+.index-wrapper{
+    display: flex;
+    width: 100%;
+
+}
+
+.genres-wrapper{
+    width: 20%;
+    margin: 2rem 0 0 0;
+    display: inline-block;
+    flex-direction: column;
+    background-color: var(--color-primary-lighter);
+    max-height: 80rem;
+    position: sticky;
+    top: 0;
+}
+
+.genres-wrapper h3{
+    margin-top: 0;
+    padding: 2rem;
+    font-size: 2rem;
+    text-align: center;
+    font-weight: bold;
+    color: var(--color-navigation-element);
+    background-color: var(--color-primary-darker);
+}
+
+.genres-wrapper a{
+    display: block;
+    font-size: 1.8rem;
+    text-align: center;
+    text-decoration: none;
+    padding: 1.5rem;
+    color: var(--color-grey-dark);
+
+}
+
+.genres-wrapper a:hover{
+    cursor: pointer;
+    color: var(--color-accent);
+}
+
 .products-wrapper {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    width: 80%;
+    margin: 0;
 }
 
 .product-card {
     background-color: #fffae6;
-    width: calc(20% - 4rem);
+    width: calc(25% - 4rem);
     margin: 2rem 0 2rem 0;
     border-radius: 5px;
     padding: 2rem;
@@ -667,6 +711,12 @@ html {
 .details-info-rating{
     font-size: 1.5rem;
 }
+.details-info-publisher > a{
+    font-size: 1.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 1rem;
+}
 
 .product-card-price-details a{
     width: 100%;
@@ -783,6 +833,7 @@ html {
     justify-content: center;
     align-items: center;
     margin-top: 5rem;
+    width: 100%;
 
 }
 
@@ -794,5 +845,107 @@ html {
 .web-footer i:hover{
     cursor: pointer;
 }
+
+/************************ basket page **********************************/
+.basket-body{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.basket-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.basket-single-item{
+    display: flex;
+    align-items: center;
+    height: 20rem;
+    width: 80rem;
+    margin-top: 2rem;
+    justify-content: space-around;
+    background-color: #fffae6;
+    -webkit-box-shadow: 15px 11px 59px -22px rgba(0,0,0,0.75);
+    -moz-box-shadow: 15px 11px 59px -22px rgba(0,0,0,0.75);
+    box-shadow: 15px 11px 59px -22px rgba(0,0,0,0.75);
+}
+
+.basket-single-item img{
+    width: 10rem;
+}
+
+.basket-single-item p{
+    font-size: 2rem;
+    display: block;
+    width: 20rem;
+}
+
+.basket-quantity{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 2rem;
+}
+
+.basket-quantity-btn{
+    padding: 1rem 0;
+    font-size: 1.5rem;
+    width: 5.5rem;
+    border: none;
+}
+
+.btn-plus{
+    background-color: forestgreen;
+    color: white;
+}
+
+.btn-minus{
+    background-color: red;
+    color: white;
+}
+
+.basket-quantity-input{
+    width: 5.5rem;
+    height: 3rem;
+    border: none;
+    text-align: center
+}
+
+.basket-delete-btn{
+    font-size: 2rem;
+    padding: 2rem 3rem;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.basket-delete-btn:hover{
+    cursor: pointer;
+    background-color: transparent;
+    color: red;
+    border: 1px solid red;
+}
+
+.basket-finalize{
+    padding: 2rem;
+    font-size: 2.5rem;
+    background-color: var(--color-navigation-element);
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    border-radius: 5px;
+}
+
+.basket-finalize:hover{
+    cursor: pointer;
+    padding: 2rem;
+    font-size: 2.5rem;
+    background-color: var(--color-accent);
+    color: var(--color-navigation-element);
+    transform: scale(1.05);
+}
+
 
 

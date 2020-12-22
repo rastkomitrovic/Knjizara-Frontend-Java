@@ -7,7 +7,11 @@ document.getElementById("input-quantity").addEventListener("keyup",() => {
 })
 
 let slideIndex = 1;
-showSlides(slideIndex);
+try{
+    showSlides(slideIndex);
+} catch(err) {
+    console.log(err)
+}
 
 // Next/previous controls
 function plusSlides(n) {
@@ -31,8 +35,12 @@ function showSlides(n) {
     for (i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace(" active", "");
     }
-    slides[slideIndex-1].style.display = "block";
-    dots[slideIndex-1].className += " active";
+    try{
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+    } catch(err){
+        console.log(err)
+    }
 }
 
 async function addToBasket(bookId){
@@ -40,26 +48,31 @@ async function addToBasket(bookId){
     if(!basketArr){
         basketArr = [];
     }
-    console.log(basketArr);
-    const quantity = document.querySelector(".details-info-quantity").value;
+    const quantity = document.querySelector("#input-quantity").value;
     for (book of basketArr){
         if(book.bookId === bookId){
-            book.quantity = book.quantity + quantity;
+            console.log("in here")
+            book.quantity = parseInt(book.quantity) + parseInt(quantity);
             const isAvailable = await checkAvailableQantity(bookId, book.quantity)
             if(!isAvailable){
                 book.quantity = book.quantity - quantity;
                 window.alert("Nema dovoljno primeraka na stanju!")
+            }else {
+                localStorage.removeItem("myBasket")
+                localStorage.setItem("myBasket", JSON.stringify(basketArr))
             }
             return;
         }
     }
     const isAvailable = await checkAvailableQantity(bookId, quantity)
-    if(isAvailable){
+    console.log(isAvailable)
+    if(isAvailable === true){
         basketArr.push({bookId, quantity, active: true});
         localStorage.removeItem("myBasket");
         localStorage.setItem("myBasket", JSON.stringify(basketArr));
+    }else {
+        window.alert("Nema dovoljno primeraka na stanju!");
     }
-    window.alert("Nema dovoljno primeraka na stanju!");
 }
 
 function loadMoreComments(bookId){

@@ -97,36 +97,40 @@
             <c:choose>
                 <c:when test="${book.authors.size()>=2}">
                     <c:forEach var="author" items="${book.authors.subList(0,book.authors.size()-1)}">
-                        <a href="" class="details-info-author">
+                        <a href="${pageContext.request.contextPath}/search/0/15/bookName/Author/${author.authorId}" class="details-info-author">
                             <p>${author.toString()}, </p>
                         </a>
                     </c:forEach>
-                    <a href="" class="details-info-author">
+                    <a href="${pageContext.request.contextPath}/search/0/15/bookName/Author/${book.authors.get(book.authors.size()-1).authorId}" class="details-info-author">
                         <p>${book.authors.get(book.authors.size()-1).toString()}</p>
                     </a>
                 </c:when>
                 <c:otherwise>
-                    <a href="" class="details-info-author">
+                    <a href="${pageContext.request.contextPath}/search/0/15/bookName/Author/${book.authors.get(0).authorId}" class="details-info-author">
                         <p>${book.authors.get(0).toString()}</p>
                     </a>
                 </c:otherwise>
             </c:choose>
         </div>
+        <p class="details-info-publisher">
+            <span style="color: var(--color-accent); font-size: 1.5rem">Izdavac:</span>
+            <a href="${pageContext.request.contextPath}/search/0/15/bookName/Publisher/${book.publisher.publisherId}">${book.publisher.publisherName}</a>
+        </p>
         <div class="details-info-genres">
             <p style="color: var(--color-accent)">Žanrovi: </p>
             <c:choose>
                 <c:when test="${book.genres.size()>=2}">
                     <c:forEach var="genre" items="${book.genres.subList(0,book.genres.size()-1)}">
-                        <a href="" class="details-info-genre">
+                        <a href="${pageContext.request.contextPath}/search/0/15/bookName/Genre/${genre.genreId}" class="details-info-genre">
                             <p>${genre.toString()}, </p>
                         </a>
                     </c:forEach>
-                    <a href="" class="details-info-genre">
+                    <a href="${pageContext.request.contextPath}/search/0/15/bookName/Genre/${book.genres.get(book.genres.size()-1).genreId}" class="details-info-genre">
                         <p>${book.genres.get(book.genres.size()-1).toString()}</p>
                     </a>
                 </c:when>
                 <c:otherwise>
-                    <a href="" class="details-info-genre">
+                    <a href="${pageContext.request.contextPath}/search/0/15/bookName/Genre/${book.genres.get(0).genreId}" class="details-info-genre">
                         <p>${book.genres.get(0).toString()}</p>
                     </a>
                 </c:otherwise>

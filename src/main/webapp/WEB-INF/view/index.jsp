@@ -64,33 +64,51 @@
     </div>
 </nav>
 
-<section class="products-wrapper">
-    <c:forEach items="${books}" var="book">
-        <div class="product-card">
-            <c:if test="${book.images.size() ge 1}">
-                <img src="${book.images.get(0).imageUrl}" class="product-card-img"/>
-            </c:if>
-            <div class="product-card-name-review">
-                <h2 class="product-card-name">${book.bookName}</h2>
-                <p class="product-card-review"><i class="fa fa-star" aria-hidden="true"></i>${book.rating}</p>
+<section class="index-wrapper">
+
+    <section class="genres-wrapper">
+        <h3>Pretražuj po žanrovima</h3>
+        <c:forEach var="genre" items="${genres}">
+            <a href="${pageContext.request.contextPath}/search/0/15/bookName/Genre/${genre.genreId}">${genre.genreName}</a>
+        </c:forEach>
+        <!--<a href="">Genre 1</a>
+        <a href="">Genre 1</a>
+        <a href="">Genre 1</a>
+        <a href="">Genre 1</a>
+        <a href="">Genre 1</a>
+        <a href="">Genre 1</a>-->
+    </section>
+
+    <section class="products-wrapper">
+        <c:forEach items="${books}" var="book">
+            <div class="product-card">
+                <c:if test="${book.images.size() ge 1}">
+                    <img src="${book.images.get(0).imageUrl}" class="product-card-img"/>
+                </c:if>
+                <div class="product-card-name-review">
+                    <h2 class="product-card-name">${book.bookName}</h2>
+                    <p class="product-card-review"><i class="fa fa-star" aria-hidden="true"></i>${book.rating}</p>
+                </div>
+                <h4 class="product-card-author">
+                    <c:forEach items="${book.authors}" var="author">
+                        <p>${author.firstName} &nbsp; ${author.middleName} &nbsp; ${author.lastName}</p>
+                        <br>
+                    </c:forEach>
+                </h4>
+                <h6 class="product-card-isbn">${book.ISBN}</h6>
+                <div class="product-card-price-details">
+                    <p class="product-card-price">${book.price}</p>
+                    <a href="${pageContext.request.contextPath}/p/${book.bookId}">
+                        <button class="product-card-details">Detalji</button>
+                    </a>
+                </div>
             </div>
-            <h4 class="product-card-author">
-                <c:forEach items="${book.authors}" var="author">
-                    <p>${author.firstName} &nbsp; ${author.middleName} &nbsp; ${author.lastName}</p>
-                    <br>
-                </c:forEach>
-            </h4>
-            <h6 class="product-card-isbn">${book.ISBN}</h6>
-            <div class="product-card-price-details">
-                <p class="product-card-price">${book.price}</p>
-                <a href="${pageContext.request.contextPath}/p/${book.bookId}">
-                    <button class="product-card-details">Detalji</button>
-                </a>
-            </div>
-        </div>
-    </c:forEach>
+        </c:forEach>
+    </section>
 
 </section>
+
+
 
 <footer class="web-footer">
     <i class="fa fa-instagram"></i>

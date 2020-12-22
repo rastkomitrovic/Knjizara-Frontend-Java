@@ -16,6 +16,10 @@ public interface BookService {
 
     ResponseEntity<RestPageImpl<BookDTO>> findBooksByAuthor(Long authorId, int page, int size, String sort);
 
+    ResponseEntity<RestPageImpl<BookDTO>> findBooksByGenre(Long genreId, int page, int size, String sort);
+
+    ResponseEntity<RestPageImpl<BookDTO>> findBooksByPublisher(Long publisherId, int page, int size, String sort);
+
     ResponseEntity<Object> saveBook(BookDTO bookDTO);
 
     ResponseEntity<Object> updateBook(BookDTO bookDTO);

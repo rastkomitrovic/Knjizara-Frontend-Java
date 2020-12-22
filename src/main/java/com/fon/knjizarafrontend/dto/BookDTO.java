@@ -39,4 +39,6 @@ public class BookDTO {
     private List<CommentDTO> comments;
     @JsonProperty("rating")
     private float rating;
+    @JsonProperty("publisher")
+    private PublisherDTO publisher;
 }

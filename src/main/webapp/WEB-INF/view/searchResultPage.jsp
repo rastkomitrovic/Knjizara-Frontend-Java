@@ -15,7 +15,7 @@
     <div class="navigation-left">
         <p>
             <a href="${pageContext.request.contextPath}/mainPage">
-                <img style="height:6vh; width: 18vh;"src="${pageContext.request.contextPath}/img/logo.png"/>
+                <img style="height:6vh; width: 18vh;" src="${pageContext.request.contextPath}/img/logo.png"/>
             </a>
         </p>
         <p class="navigation-element">
@@ -39,7 +39,7 @@
     </div>
     <div class="navigation-right">
         <div class="navigation-right-search">
-            <input type="text" id="search-field" placeholder="Pokušajte: Tolkin" >
+            <input type="text" id="search-field" placeholder="Pokušajte: Tolkin">
             <button>
                 <i class="fa fa-search"></i>
             </button>
@@ -52,13 +52,16 @@
         </button>
         <section class="navigation-user-dropdown">
             <a href="${pageContext.request.contextPath}/basket">
-                <i class="fa fa-shopping-cart"></i> <p>Korpa</p>
+                <i class="fa fa-shopping-cart"></i>
+                <p>Korpa</p>
             </a>
             <a href="${pageContext.request.contextPath}/userProfile">
-                <i class="fa fa-wrench"></i> <p>Podešavanja</p>
+                <i class="fa fa-wrench"></i>
+                <p>Podešavanja</p>
             </a>
             <a href="${pageContext.request.contextPath}/logout">
-                <i class="fa fa-arrow-right"></i> <p>Izloguj se</p>
+                <i class="fa fa-arrow-right"></i>
+                <p>Izloguj se</p>
             </a>
 
         </section>
@@ -81,9 +84,9 @@
                     </div>
                     <h4 class="product-card-author">
                         <p>${book.authors.get(0).firstName} ${book.authors.get(0).middleName} ${book.authors.get(0).lastName}
-                        <c:if test="${book.authors.size()>1}">
-                            i drugi
-                        </c:if>
+                            <c:if test="${book.authors.size()>1}">
+                                i drugi
+                            </c:if>
                         </p>
                     </h4>
                     <h6 class="product-card-isbn">${book.ISBN}</h6>
@@ -97,20 +100,29 @@
             </c:forEach>
         </section>
         <div class="pages-navigation">
-            <form:form onsubmit="return checkPrevious()" style="display: inline" action="${pageContext.request.contextPath}/search/${currentPage-1}/${size}/${sort}/${searchParam}" method="get">
-                <button type="submit" class="results-prevnext-btn"><i class="fa fa-chevron-left" id="previous-btn"></i></button>
-            </form:form>
-            <c:forEach var="i" begin="1" end="${totalPages}">
-                <form:form onsubmit="return checkCurrent(${i-1})" style="display: inline" action="${pageContext.request.contextPath}/search/${i-1}/${size}/${sort}/${searchParam}" method="get">
-                    <button type="submit" class="results-nav-btn">
-                            ${i}
+            <c:if test="${totalPages>1}">
+                <form:form onsubmit="return checkPrevious()" style="display: inline"
+                           action="${pageContext.request.contextPath}/search/${currentPage-1}/${size}/${sort}/${searchType}/${searchParam}"
+                           method="get">
+                    <button type="submit" class="results-prevnext-btn"><i class="fa fa-chevron-left"
+                                                                          id="previous-btn"></i></button>
+                </form:form>
+                <c:forEach var="i" begin="1" end="${totalPages}">
+                    <form:form onsubmit="return checkCurrent(${i-1})" style="display: inline"
+                               action="${pageContext.request.contextPath}/search/${i-1}/${size}/${sort}/${searchType}/${searchParam}"
+                               method="get">
+                        <button type="submit" class="results-nav-btn">
+                                ${i}
+                        </button>
+                    </form:form>
+                </c:forEach>
+                <form:form onsubmit="return checkNext()" style="display: inline"
+                           action="${pageContext.request.contextPath}/search/${currentPage+1}/${size}/${sort}/${searchType}/${searchParam}"
+                           method="get">
+                    <button type="submit" class="results-prevnext-btn" id="next-btn"><i class="fa fa-chevron-right"></i>
                     </button>
                 </form:form>
-            </c:forEach>
-            <form:form onsubmit="return checkNext()" style="display: inline" action="${pageContext.request.contextPath}/search/${currentPage+1}/${size}/${sort}/${searchParam}" method="get">
-                <button type="submit" class="results-prevnext-btn" id="next-btn"><i class="fa fa-chevron-right"></i></button>
-            </form:form>
-
+            </c:if>
         </div>
     </c:when>
 
@@ -126,9 +138,10 @@
 </footer>
 
 <script>
-    const isFirst=${isFirst};
-    const isLast=${isLastPage};
-    const currentPage=${currentPage}
+    const isFirst =${isFirst};
+    const isLast =${isLastPage};
+    const currentPage =
+    ${currentPage}
 
 </script>
 <script src="${pageContext.request.contextPath}/js/SearchResultPageScript.js"></script>

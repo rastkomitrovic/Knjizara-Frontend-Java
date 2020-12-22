@@ -47,7 +47,21 @@ public class BookServiceImpl implements BookService {
     public ResponseEntity<RestPageImpl<BookDTO>> findBooksByAuthor(Long authorId, int page, int size, String sort) {
         ParameterizedTypeReference<RestPageImpl<BookDTO>> responseType = new ParameterizedTypeReference<RestPageImpl<BookDTO>>() {
         };
-        return restTemplate.exchange(api + "/authorSearch/"+authorId+"/+" + page + "/" + size + "/" + sort, HttpMethod.GET, null, responseType);
+        return restTemplate.exchange(api + "/authorSearch/"+authorId+"/" + page + "/" + size + "/" + sort, HttpMethod.GET, null, responseType);
+    }
+
+    @Override
+    public ResponseEntity<RestPageImpl<BookDTO>> findBooksByGenre(Long genreId, int page, int size, String sort) {
+        ParameterizedTypeReference<RestPageImpl<BookDTO>> responseType= new ParameterizedTypeReference<RestPageImpl<BookDTO>>() {
+        };
+        return restTemplate.exchange(api+"/genreSearch/"+genreId+"/" + page + "/" + size + "/" + sort, HttpMethod.GET, null, responseType);
+    }
+
+    @Override
+    public ResponseEntity<RestPageImpl<BookDTO>> findBooksByPublisher(Long publisherId, int page, int size, String sort) {
+        ParameterizedTypeReference<RestPageImpl<BookDTO>> responseType= new ParameterizedTypeReference<RestPageImpl<BookDTO>>() {
+        };
+        return restTemplate.exchange(api+"/publisherSearch/"+publisherId+"/" + page + "/" + size + "/" + sort, HttpMethod.GET, null, responseType);
     }
 
     @Override
@@ -70,6 +84,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public ResponseEntity<BookDTO[]> getAllBooksBestReviews() {
-        return restTemplate.getForEntity(api+"/top10", BookDTO[].class);
+        return restTemplate.getForEntity(api+"/top12", BookDTO[].class);
     }
 }

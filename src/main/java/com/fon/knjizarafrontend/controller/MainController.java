@@ -1,8 +1,10 @@
 package com.fon.knjizarafrontend.controller;
 
 import com.fon.knjizarafrontend.dto.BookDTO;
+import com.fon.knjizarafrontend.dto.GenreDTO;
 import com.fon.knjizarafrontend.service.BasketService;
 import com.fon.knjizarafrontend.service.BookService;
+import com.fon.knjizarafrontend.service.GenreService;
 import com.fon.knjizarafrontend.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,9 @@ public class MainController {
     private BookService bookService;
 
     @Resource
+    private GenreService genreService;
+
+    @Resource
     private UserService userService;
 
     @Resource
@@ -30,13 +35,22 @@ public class MainController {
     @RequestMapping(value = "/mainPage")
     public String helloPage(Model model, Principal principal) {
         ResponseEntity<BookDTO[]> bookDtoResponse = bookService.getAllBooksBestReviews();
-        if (bookDtoResponse.getStatusCode().equals(HttpStatus.OK)) {
+        ResponseEntity<GenreDTO[]> genresDtoResponse = genreService.getAllGenresNoPaging();
+
+        if (bookDtoResponse.getStatusCode().equals(HttpStatus.OK) && genresDtoResponse.getStatusCode().equals(HttpStatus.OK)) {
             model.addAttribute("books",
                     bookDtoResponse.getBody() == null ? new LinkedList<>() : Arrays.asList(bookDtoResponse.getBody()));
+            model.addAttribute("genres", genresDtoResponse.getBody() == null ? new LinkedList<>() : Arrays.asList(genresDtoResponse.getBody()));
         }
 
         return "index";
     }
+
+    @RequestMapping(value = "/basket")
+    public String basketPage() {
+        return "basket";
+    }
+
 
 }
 
