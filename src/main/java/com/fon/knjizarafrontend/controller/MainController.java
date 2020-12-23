@@ -1,18 +1,20 @@
 package com.fon.knjizarafrontend.controller;
 
+import com.fon.knjizarafrontend.dto.AuthorDTO;
 import com.fon.knjizarafrontend.dto.BookDTO;
 import com.fon.knjizarafrontend.dto.GenreDTO;
-import com.fon.knjizarafrontend.service.BasketService;
-import com.fon.knjizarafrontend.service.BookService;
-import com.fon.knjizarafrontend.service.GenreService;
-import com.fon.knjizarafrontend.service.UserService;
+import com.fon.knjizarafrontend.dto.UserDTO;
+import com.fon.knjizarafrontend.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import javax.xml.ws.Response;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -30,17 +32,30 @@ public class MainController {
     private UserService userService;
 
     @Resource
+    private AuthorService authorService;
+
+    @Resource
     private BasketService basketService;
+
+    @Resource
+    private PasswordEncoder passwordEncoder;
 
     @RequestMapping(value = "/mainPage")
     public String helloPage(Model model, Principal principal) {
         ResponseEntity<BookDTO[]> bookDtoResponse = bookService.getAllBooksBestReviews();
         ResponseEntity<GenreDTO[]> genresDtoResponse = genreService.getAllGenresNoPaging();
 
-        if (bookDtoResponse.getStatusCode().equals(HttpStatus.OK) && genresDtoResponse.getStatusCode().equals(HttpStatus.OK)) {
+        ResponseEntity<UserDTO> resUser=userService.findUserByUsername("rastko");
+        UserDTO user=resUser.getBody();
+        user.setPassword(passwordEncoder.encode("rastko"));
+        userService.updateUser(user);
+
+        ResponseEntity<AuthorDTO[]> authorsResponse=authorService.findAllAuthorsNoPaging();
+        if (bookDtoResponse.getStatusCode().equals(HttpStatus.OK) && genresDtoResponse.getStatusCode().equals(HttpStatus.OK) && authorsResponse.getStatusCode().equals(HttpStatus.OK)) {
             model.addAttribute("books",
                     bookDtoResponse.getBody() == null ? new LinkedList<>() : Arrays.asList(bookDtoResponse.getBody()));
             model.addAttribute("genres", genresDtoResponse.getBody() == null ? new LinkedList<>() : Arrays.asList(genresDtoResponse.getBody()));
+            model.addAttribute("authors", authorsResponse.getBody() == null ? new LinkedList<>() : Arrays.asList(authorsResponse.getBody()));
         }
 
         return "index";

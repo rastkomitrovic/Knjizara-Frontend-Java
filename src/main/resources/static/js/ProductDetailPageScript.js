@@ -60,6 +60,7 @@ async function addToBasket(bookId){
             }else {
                 localStorage.removeItem("myBasket")
                 localStorage.setItem("myBasket", JSON.stringify(basketArr))
+                backToMain()
             }
             return;
         }
@@ -70,6 +71,7 @@ async function addToBasket(bookId){
         basketArr.push({bookId, quantity, active: true});
         localStorage.removeItem("myBasket");
         localStorage.setItem("myBasket", JSON.stringify(basketArr));
+        backToMain()
     }else {
         window.alert("Nema dovoljno primeraka na stanju!");
     }
@@ -77,4 +79,9 @@ async function addToBasket(bookId){
 
 function loadMoreComments(bookId){
     console.log(bookId)
+}
+
+function backToMain(){
+    window.alert("Uspešno ste dodali u korpu!")
+    window.location = "http://localhost:9099/mainPage"
 }

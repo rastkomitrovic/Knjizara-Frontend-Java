@@ -14,34 +14,30 @@
     <div class="navigation-left">
         <p>
             <a href="${pageContext.request.contextPath}/mainPage">
-                <img style="height:6vh; width: 18vh;"src="${pageContext.request.contextPath}/img/logo.png"/>
+                <img style="height:6vh; width: 18vh;" src="${pageContext.request.contextPath}/img/logo.png"/>
             </a>
         </p>
         <p class="navigation-element">
-            <a href="">Autori</a>
-        </p>
-        <p class="navigation-element">
-            <a href="">Knjige</a>
-        </p>
-        <p class="navigation-element">
-            <a href="">Žanrovi</a>
-        </p>
-        <p class="navigation-element">
-            <a href="">Prodavnice</a>
+            <a href="${pageContext.request.contextPath}/search/0/15/bookName/All/all">Knjige</a>
         </p>
         <p class="navigation-element">
             <a href="">O nama</a>
         </p>
-        <p class="navigation-element">
-            <a href="">Dodavanje korisnika</a>
-        </p>
+        <sec:authorize access="hasAuthority('ADMIN')">
+            <p class="navigation-element">
+                <a href="">Dodavanje korisnika</a>
+            </p>
+        </sec:authorize>
+
     </div>
     <div class="navigation-right">
         <div class="navigation-right-search">
             <input type="text" id="search-field" placeholder="Pokušajte: Tolkin" >
-            <button>
-                <i class="fa fa-search"></i>
-            </button>
+            <a href="" id="search-results-page-link">
+                <button>
+                    <i class="fa fa-search"></i>
+                </button>
+            </a>
             <div class="navigation-right-suggestions">
 
             </div>
@@ -67,21 +63,35 @@
 <section class="index-wrapper">
 
     <section class="genres-wrapper">
-        <h3>Pretražuj po žanrovima</h3>
-        <c:forEach var="genre" items="${genres}">
-            <a href="${pageContext.request.contextPath}/search/0/15/bookName/Genre/${genre.genreId}">${genre.genreName}</a>
-        </c:forEach>
-        <!--<a href="">Genre 1</a>
-        <a href="">Genre 1</a>
-        <a href="">Genre 1</a>
-        <a href="">Genre 1</a>
-        <a href="">Genre 1</a>
-        <a href="">Genre 1</a>-->
+        <h3>Pretražuj po:
+            <select id="genres-or-authors">
+                <option value="1">žanru</option>
+                <option value="2">autorima</option>
+            </select>
+        </h3>
+        <div id="main-genres">
+            <c:forEach var="genre" items="${genres}">
+                <a href="${pageContext.request.contextPath}/search/0/15/bookName/Genre/${genre.genreId}">${genre.genreName}</a>
+            </c:forEach>
+        </div>
+       <div id="main-authors">
+           <sec:authorize access="hasAuthority('ADMIN')">
+               <c:forEach var="author" items="${authors}">
+                   <a onclick="openModal(${author.authorId} , ${author.firstName} , ${author.lastName})">${author.firstName} ${author.middleName} ${author.lastName}</a>
+               </c:forEach>
+           </sec:authorize>
+           <sec:authorize access="hasAuthority('USER')">
+               <c:forEach var="author" items="${authors}">
+                   <a href="${pageContext.request.contextPath}/search/0/15/bookName/Author/${author.authorId}">${author.firstName} ${author.middleName} ${author.lastName}</a>
+               </c:forEach>
+           </sec:authorize>
+       </div>
+
     </section>
 
-    <section class="products-wrapper">
+    <section class="products-wrapper products-wrapper-main">
         <c:forEach items="${books}" var="book">
-            <div class="product-card">
+            <div class="product-card product-card-main">
                 <c:if test="${book.images.size() ge 1}">
                     <img src="${book.images.get(0).imageUrl}" class="product-card-img"/>
                 </c:if>
@@ -91,11 +101,10 @@
                 </div>
                 <h4 class="product-card-author">
                     <c:forEach items="${book.authors}" var="author">
-                        <p>${author.firstName} &nbsp; ${author.middleName} &nbsp; ${author.lastName}</p>
+                        <p>${author.firstName} ${author.middleName} ${author.lastName}</p>
                         <br>
                     </c:forEach>
                 </h4>
-                <h6 class="product-card-isbn">${book.ISBN}</h6>
                 <div class="product-card-price-details">
                     <p class="product-card-price">${book.price}</p>
                     <a href="${pageContext.request.contextPath}/p/${book.bookId}">
@@ -110,11 +119,14 @@
 
 
 
+
 <footer class="web-footer">
     <i class="fa fa-instagram"></i>
     <i class="fa fa-facebook"></i>
     <i class="fa fa-linkedin"></i>
 </footer>
+
+
 
 <script src="${pageContext.request.contextPath}/js/MainPage.js"></script>
 </body>

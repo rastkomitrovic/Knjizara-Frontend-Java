@@ -22,7 +22,7 @@
             <a href="">Autori</a>
         </p>
         <p class="navigation-element">
-            <a href="">Knjige</a>
+            <a href="${pageContext.request.contextPath}/search/0/15/bookName/All/all">Knjige</a>
         </p>
         <p class="navigation-element">
             <a href="">Žanrovi</a>
@@ -71,10 +71,10 @@
 
 <c:choose>
     <c:when test="${!isEmpty}">
-        <h1>Pronadjeno je ukupno: ${totalNumberOfFoundElements}</h1>
-        <section class="products-wrapper">
+        <h1 class="search-result-heading">Pronadjeno je ukupno: ${totalNumberOfFoundElements}</h1>
+        <section class="products-wrapper products-wrapper-search">
             <c:forEach items="${books}" var="book">
-                <div class="product-card">
+                <div class="product-card product-card-search">
                     <c:if test="${book.images.size() ge 1}">
                         <img src="${book.images.get(0).imageUrl}" class="product-card-img"/>
                     </c:if>
@@ -89,7 +89,6 @@
                             </c:if>
                         </p>
                     </h4>
-                    <h6 class="product-card-isbn">${book.ISBN}</h6>
                     <div class="product-card-price-details">
                         <p class="product-card-price">${book.price}</p>
                         <a href="${pageContext.request.contextPath}/p/${book.bookId}">
@@ -127,7 +126,7 @@
     </c:when>
 
     <c:otherwise>
-        <h1 class="no-books-found">Nije pronadjena nijedna knjiga po zadatom kriterijumu</h1>
+        <h1 class="search-result-heading">Nije pronadjena nijedna knjiga po zadatom kriterijumu</h1>
     </c:otherwise>
 </c:choose>
 

@@ -1,8 +1,8 @@
-let booksBasket = JSON.parse(localStorage.getItem("myBasket"))
 
 async function renderBasket(){
+    let booksBasket = JSON.parse(localStorage.getItem("myBasket"))
     if(booksBasket.length===0){
-        // render nemate iteme u korpi
+        document.querySelector(".basket-wrapper").innerHTML = "<h3>Korpa je prazna</h3>";
         return;
     }
     let booksArr = [];
@@ -12,21 +12,21 @@ async function renderBasket(){
         const singleBook = await res.json();
         booksArr.push({book: singleBook, quantity: book.quantity})
     }
-    booksArr.forEach(book => {
+    booksArr.forEach((book, i) => {
         booksHtml = booksHtml + `
-            <div class="basket-single-item">
+    <div class="basket-single-item">
         <img src="${book.book.images[0].imageUrl}"/>
         <p>${book.book.bookName}</p>
         <div class="basket-quantity">
-            <button class="basket-quantity-btn btn-plus" id="plus" onclick="changeQantity(i,1)">
+            <button class="basket-quantity-btn btn-plus" id="plus" onclick="changeQuantity(${i},1)">
                 +
             </button>
-            <input readonly class="basket-quantity-input" value="${book.quantity}"/>
-            <button class="basket-quantity-btn btn-minus" id="minus" onclick="changeQantity(i,-1)">
+            <input readonly class="basket-quantity-input" value="${book.quantity}" id="${i}"/>
+            <button class="basket-quantity-btn btn-minus" id="minus" onclick="changeQuantity(${i},-1)">
                 -
             </button>
         </div>
-        <button class="basket-delete-btn" onclick="deleteFromBasket(i)"><i class="fa fa-trash"></i></button>
+        <button class="basket-delete-btn" onclick="deleteFromBasket(${i})"><i class="fa fa-trash"></i></button>
     </div>
         `
     })
@@ -34,12 +34,32 @@ async function renderBasket(){
 }
 
 
-function changeQuantity(book, q){
+async function changeQuantity(book, q){
+    const basketBooks = JSON.parse(localStorage.getItem("myBasket"));
+    if(q === -1 && parseInt(basketBooks[book].quantity) === 1){
+        await deleteFromBasket(book)
+        return;
+    }
+
+    basketBooks[book].quantity = parseInt(basketBooks[book].quantity) + parseInt(q)
+    localStorage.removeItem("myBasket")
+    localStorage.setItem("myBasket", JSON.stringify(basketBooks))
+    let p = parseInt(document.getElementById(book).value)
+    let r = parseInt(q)
+    let res = p + r
+    document.getElementById(book).value = res
 
 }
 
-function deleteFromBasket(book){
+async function deleteFromBasket(book){
+    const basketBooks = JSON.parse(localStorage.getItem("myBasket"));
+    basketBooks.splice(book, 1)
 
+    localStorage.removeItem("myBasket")
+    localStorage.setItem("myBasket", JSON.stringify(basketBooks))
+
+
+    await renderBasket()
 }
 
 renderBasket();

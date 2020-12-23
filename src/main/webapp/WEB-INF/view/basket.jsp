@@ -25,7 +25,7 @@
             <a href="">Autori</a>
         </p>
         <p class="navigation-element">
-            <a href="">Knjige</a>
+            <a href="${pageContext.request.contextPath}/search/0/15/bookName/All/all">Knjige</a>
         </p>
         <p class="navigation-element">
             <a href="">Žanrovi</a>

@@ -15,7 +15,7 @@ import java.util.List;
 public class BookDTO {
     @JsonProperty("bookId")
     private Long bookId;
-    @JsonProperty("ISBN")
+    @JsonProperty("isbn")
     private String ISBN;
     @JsonProperty("bookName")
     private String bookName;
