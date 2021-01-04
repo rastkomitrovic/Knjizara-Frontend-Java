@@ -55,4 +55,9 @@ public class AuthorServiceImpl implements AuthorService {
     public ResponseEntity<Object> deleteAuthor(long authorId) {
         return restTemplate.exchange(api + "/" + authorId, HttpMethod.DELETE, null, Object.class);
     }
+
+    @Override
+    public ResponseEntity<AuthorDTO> findAuthor(Long authorId) {
+        return restTemplate.getForEntity(api+"/"+authorId,AuthorDTO.class);
+    }
 }

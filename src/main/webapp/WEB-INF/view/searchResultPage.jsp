@@ -19,30 +19,25 @@
             </a>
         </p>
         <p class="navigation-element">
-            <a href="">Autori</a>
-        </p>
-        <p class="navigation-element">
             <a href="${pageContext.request.contextPath}/search/0/15/bookName/All/all">Knjige</a>
         </p>
         <p class="navigation-element">
-            <a href="">Žanrovi</a>
+            <a href="${pageContext.request.contextPath}/aboutUs">O nama</a>
         </p>
-        <p class="navigation-element">
-            <a href="">Prodavnice</a>
-        </p>
-        <p class="navigation-element">
-            <a href="">O nama</a>
-        </p>
-        <p class="navigation-element">
-            <a href="">Dodavanje korisnika</a>
-        </p>
+        <sec:authorize access="hasAuthority('ADMIN')">
+            <p class="navigation-element">
+                <a href="${pageContext.request.contextPath}/addNewUser">Dodavanje korisnika</a>
+            </p>
+        </sec:authorize>
     </div>
     <div class="navigation-right">
         <div class="navigation-right-search">
-            <input type="text" id="search-field" placeholder="Pokušajte: Tolkin">
-            <button>
-                <i class="fa fa-search"></i>
-            </button>
+            <input type="text" id="search-field" placeholder="Pokušajte: Tolkin" >
+            <a href="" id="search-results-page-link">
+                <button>
+                    <i class="fa fa-search"></i>
+                </button>
+            </a>
             <div class="navigation-right-suggestions">
 
             </div>
@@ -52,16 +47,13 @@
         </button>
         <section class="navigation-user-dropdown">
             <a href="${pageContext.request.contextPath}/basket">
-                <i class="fa fa-shopping-cart"></i>
-                <p>Korpa</p>
+                <i class="fa fa-shopping-cart"></i> <p>Korpa</p>
             </a>
             <a href="${pageContext.request.contextPath}/userProfile">
-                <i class="fa fa-wrench"></i>
-                <p>Podešavanja</p>
+                <i class="fa fa-wrench"></i> <p>Podešavanja</p>
             </a>
             <a href="${pageContext.request.contextPath}/logout">
-                <i class="fa fa-arrow-right"></i>
-                <p>Izloguj se</p>
+                <i class="fa fa-arrow-right"></i> <p>Izloguj se</p>
             </a>
 
         </section>

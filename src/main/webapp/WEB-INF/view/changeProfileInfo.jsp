@@ -15,30 +15,20 @@
     <div class="navigation-left">
         <p>
             <a href="${pageContext.request.contextPath}/mainPage">
-                <img style="height:6vh; width: 18vh;"src="${pageContext.request.contextPath}/img/logo.png"/>
+                <img style="height:6vh; width: 18vh;" src="${pageContext.request.contextPath}/img/logo.png"/>
             </a>
-        </p>
-        <p class="navigation-element">
-            <a href="">Autori</a>
         </p>
         <p class="navigation-element">
             <a href="${pageContext.request.contextPath}/search/0/15/bookName/All/all">Knjige</a>
         </p>
         <p class="navigation-element">
-            <a href="">Žanrovi</a>
-        </p>
-        <p class="navigation-element">
-            <a href="">Prodavnice</a>
-        </p>
-        <p class="navigation-element">
-            <a href="">O nama</a>
+            <a href="${pageContext.request.contextPath}/aboutUs">O nama</a>
         </p>
         <sec:authorize access="hasAuthority('ADMIN')">
             <p class="navigation-element">
-                <a href="">Dodavanje korisnika</a>
+                <a href="${pageContext.request.contextPath}/addNewUser">Dodavanje korisnika</a>
             </p>
         </sec:authorize>
-
     </div>
     <div class="navigation-right">
         <div class="navigation-right-search">

@@ -2,8 +2,7 @@ const suggestions = document.querySelector(".navigation-right-suggestions");
 let suggestionsHtml = ``;
 let data = [];
 
-document.getElementById("main-genres").style = "display: block;"
-document.getElementById("main-authors").style = "display: none;"
+
 
 document.getElementById("search-field").addEventListener("input",async ()=>{
     const search= document.getElementById("search-field").value
@@ -56,48 +55,9 @@ document.body.addEventListener("click", () => {
     document.getElementById("search-field").value = ""
 })
 
-document.getElementById("genres-or-authors").addEventListener("change", (e)=> {
-    if(document.getElementById("genres-or-authors").value === "1"){
-        document.getElementById("main-genres").style = "display: block;"
-        document.getElementById("main-authors").style = "display: none;"
-    } else {
-        document.getElementById("main-genres").style = "display: none;"
-        document.getElementById("main-authors").style = "display: block;"
-    }
-
-})
-
-window.addEventListener("click", (e) => {
-    if(e.target ===  document.querySelector(".admin-modal")) {
-        document.querySelector(".admin-modal").style = "display: none"
-    }
-})
-
-function openModal(id, first, last){
-    const div = document.createElement("div")
-    div.className = "admin-modal"
-
-    const modalHtml = `
-        <div class="modal-main">
-            <p>${first} ${last}</p>
-            <div class="modal-buttons">
-                <a href="http://localhost:9099/search/0/15/bookName/Author/${id}">
-                    <button>Vidi rezultate</button>
-                </a>
-                <a href="http://localhost:9099/editAuthorPage/${id}">
-                    <button>Izmeni autora</button>
-                </a>
-                <a href="http://localhost:9099/deleteAuthor/${id}">
-                    <button>Obriši autora</button>
-                </a>
-            </div>
-    
-        </div>
-    `
-    div.innerHTML = modalHtml
 
 
 
-    document.querySelector(".web-footer").insertAdjacentElement("afterend", div)
-}
+
+
 

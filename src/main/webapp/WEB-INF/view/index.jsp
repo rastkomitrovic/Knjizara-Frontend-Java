@@ -21,14 +21,13 @@
             <a href="${pageContext.request.contextPath}/search/0/15/bookName/All/all">Knjige</a>
         </p>
         <p class="navigation-element">
-            <a href="">O nama</a>
+            <a href="${pageContext.request.contextPath}/aboutUs">O nama</a>
         </p>
         <sec:authorize access="hasAuthority('ADMIN')">
             <p class="navigation-element">
-                <a href="">Dodavanje korisnika</a>
+                <a href="${pageContext.request.contextPath}/addNewUser">Dodavanje korisnika</a>
             </p>
         </sec:authorize>
-
     </div>
     <div class="navigation-right">
         <div class="navigation-right-search">
@@ -65,7 +64,7 @@
     <section class="genres-wrapper">
         <h3>Pretražuj po:
             <select id="genres-or-authors">
-                <option value="1">žanru</option>
+                <option value="1" selected="selected">žanru</option>
                 <option value="2">autorima</option>
             </select>
         </h3>
@@ -77,7 +76,7 @@
        <div id="main-authors">
            <sec:authorize access="hasAuthority('ADMIN')">
                <c:forEach var="author" items="${authors}">
-                   <a onclick="openModal(${author.authorId} , ${author.firstName} , ${author.lastName})">${author.firstName} ${author.middleName} ${author.lastName}</a>
+                   <a onclick="openModal(${author.authorId} , '${author.firstName}' , '${author.lastName}')">${author.firstName} ${author.middleName} ${author.lastName}</a>
                </c:forEach>
            </sec:authorize>
            <sec:authorize access="hasAuthority('USER')">
@@ -129,6 +128,7 @@
 
 
 <script src="${pageContext.request.contextPath}/js/MainPage.js"></script>
+<script src="${pageContext.request.contextPath}/js/GenresAuthorNavigationScript.js"></script>
 </body>
 </html>
 

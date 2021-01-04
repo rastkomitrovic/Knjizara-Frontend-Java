@@ -16,4 +16,6 @@ public interface AuthorService {
     ResponseEntity<Object> updateAuthor(AuthorDTO authorDTO);
 
     ResponseEntity<Object> deleteAuthor(long authorId);
+
+    ResponseEntity<AuthorDTO> findAuthor(Long authorId);
 }

@@ -66,7 +66,8 @@ public class MainController {
         return "basket";
     }
 
-
+    @RequestMapping(value = "/aboutUs")
+    public String aboutUs() { return "aboutUs";}
 }
 
 
