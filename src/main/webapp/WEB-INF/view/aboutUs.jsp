@@ -124,9 +124,12 @@
 </section>
 
 <footer class="web-footer">
-    <i class="fa fa-instagram"></i>
-    <i class="fa fa-facebook"></i>
-    <i class="fa fa-linkedin"></i>
+    <div class="footer-icons">
+        <i class="fa fa-instagram"></i>
+        <i class="fa fa-facebook"></i>
+        <i class="fa fa-linkedin"></i>
+    </div>
+    <a href="${pageContext.request.contextPath}/stores">Voliš miris knjiga? Poseti naše radnje!</a>
 </footer>
 
 </body>

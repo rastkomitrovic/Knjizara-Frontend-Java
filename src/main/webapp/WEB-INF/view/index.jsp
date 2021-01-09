@@ -25,7 +25,17 @@
         </p>
         <sec:authorize access="hasAuthority('ADMIN')">
             <p class="navigation-element">
-                <a href="${pageContext.request.contextPath}/addNewUser">Dodavanje korisnika</a>
+                <a href="${pageContext.request.contextPath}/addNewUser">Dodaj korisnika</a>
+            </p>
+        </sec:authorize>
+        <sec:authorize access="hasAuthority('ADMIN')">
+            <p class="navigation-element">
+                <a href="${pageContext.request.contextPath}/newBook">Dodaj knjigu</a>
+            </p>
+        </sec:authorize>
+        <sec:authorize access="hasAuthority('ADMIN')">
+            <p class="navigation-element">
+                <a href="${pageContext.request.contextPath}/newAuthor">Dodaj autora</a>
             </p>
         </sec:authorize>
     </div>
@@ -120,9 +130,12 @@
 
 
 <footer class="web-footer">
-    <i class="fa fa-instagram"></i>
-    <i class="fa fa-facebook"></i>
-    <i class="fa fa-linkedin"></i>
+    <div class="footer-icons">
+        <i class="fa fa-instagram"></i>
+        <i class="fa fa-facebook"></i>
+        <i class="fa fa-linkedin"></i>
+    </div>
+    <a href="${pageContext.request.contextPath}/stores">Voliš miris knjiga? Poseti naše radnje!</a>
 </footer>
 
 

@@ -1,9 +1,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: Rastko
-  Date: 1/2/2021
-  Time: 2:56 PM
+  Date: 1/9/2021
+  Time: 5:50 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,9 +12,10 @@
 <head>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <title>Knjizara</title>
+    <title>Dodaj autora</title>
 </head>
 <body class="index-body">
+
 <nav class="navigation">
     <div class="navigation-left">
         <p>
@@ -64,18 +66,23 @@
 </nav>
 
 <section style="width: 90%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; min-height: 70vh">
-    <form:form modelAttribute="author" cssClass="change-profile-info" action="/changeAuthorInfo">
+
+    <form:form modelAttribute="author" method="post" cssClass="change-profile-info" action="/saveAuthor">
         <div class="form-control">
-            <label for="name">Ime:</label>
+            <label for="name">Ime: </label>
             <form:input path="firstName" id="name"/>
         </div>
         <div class="form-control">
-            <label for="middle-name">Srednje ime:</label>
-            <form:input path="middleName" id="middle-name"/>
+            <label for="middleName">Srednje ime:</label>
+            <form:input path="middleName" id="middleName"/>
         </div>
         <div class="form-control">
-            <label for="surname">Prezime:</label>
-            <form:input path="lastName" id="surname"/>
+            <label for="lastName">Prezime:</label>
+            <form:input path="lastName" id="lastName"/>
+        </div>
+        <div class="form-control">
+            <label for="dateOfBirth">Datum rodjenja:</label>
+            <form:input type="date" path="dateOfBirth" id="dateOfBirth"/>
         </div>
         <div class="form-control">
             <label for="description">Opis: </label>
@@ -83,7 +90,7 @@
         </div>
 
         <div class="form-buttons">
-            <form:button type="submit" class="register-form-btn">Izmeni podatke</form:button>
+            <form:button type="submit" class="register-form-btn">Dodaj autora</form:button>
         </div>
     </form:form>
 
@@ -98,6 +105,5 @@
     <a href="${pageContext.request.contextPath}/stores">Voliš miris knjiga? Poseti naše radnje!</a>
 </footer>
 
-<script src="${pageContext.request.contextPath}/js/MainPage.js"></script>
 </body>
 </html>

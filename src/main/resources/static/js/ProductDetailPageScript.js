@@ -85,3 +85,9 @@ function backToMain(){
     window.alert("Uspešno ste dodali u korpu!")
     window.location = "http://localhost:9099/mainPage"
 }
+
+const moreCommentsBtn = document.querySelector(".comments-load-more")
+
+if(parseInt(numOfComments) === 0){
+    moreCommentsBtn.style = "display:none;"
+}

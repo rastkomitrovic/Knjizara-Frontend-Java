@@ -157,6 +157,7 @@
         </div>
     </c:forEach>
 </section>
+
 <button class="comments-load-more" onclick="loadMoreComments(${bookId})">Još komentara</button>
 
 <section class="product-details-new-comment">
@@ -172,11 +173,17 @@
 </section>
 
 <footer class="web-footer">
-    <i class="fa fa-instagram"></i>
-    <i class="fa fa-facebook"></i>
-    <i class="fa fa-linkedin"></i>
+    <div class="footer-icons">
+        <i class="fa fa-instagram"></i>
+        <i class="fa fa-facebook"></i>
+        <i class="fa fa-linkedin"></i>
+    </div>
+    <a href="${pageContext.request.contextPath}/stores">Voliš miris knjiga? Poseti naše radnje!</a>
 </footer>
 
+<script>
+    let numOfComments = ${book.comments.size()}
+</script>
 <script src="${pageContext.request.contextPath}/js/MainPage.js"></script>
 <script src="${pageContext.request.contextPath}/js/Utils/checkAvailableQuantity.js"></script>
 <script src="${pageContext.request.contextPath}/js/ProductDetailPageScript.js"></script>

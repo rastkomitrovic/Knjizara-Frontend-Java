@@ -1,23 +1,19 @@
 package com.fon.knjizarafrontend.controller;
 
-import com.fon.knjizarafrontend.dto.AuthorDTO;
-import com.fon.knjizarafrontend.dto.BookDTO;
-import com.fon.knjizarafrontend.dto.GenreDTO;
-import com.fon.knjizarafrontend.dto.UserDTO;
+import com.fon.knjizarafrontend.dto.*;
 import com.fon.knjizarafrontend.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
-import javax.xml.ws.Response;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -33,6 +29,12 @@ public class MainController {
 
     @Resource
     private AuthorService authorService;
+
+    @Resource
+    private StoreService storeService;
+
+    @Resource
+    private CityService cityService;
 
     @Resource
     private BasketService basketService;
@@ -68,6 +70,40 @@ public class MainController {
 
     @RequestMapping(value = "/aboutUs")
     public String aboutUs() { return "aboutUs";}
+
+    @RequestMapping(value = "/stores")
+    public String stores(Model model){
+        ResponseEntity<StoreDTO[]> response=storeService.findAllStores();
+        if(response.getStatusCode()==HttpStatus.OK){
+            List<StoreDTO> stores=Arrays.asList(response.getBody());
+            model.addAttribute("stores",stores);
+            return "storesPage";
+        }
+        return "";
+    }
+
+    @RequestMapping("newAuthor")
+    public String addAuthor(Model model){
+        model.addAttribute("author",new AuthorDTO());
+        return "addAuthorPage";
+    }
+
+    @RequestMapping("newBook")
+    public String addBook(Model model){
+        model.addAttribute("book",new BookDTO());
+        return "addBookPage";
+
+    }
+
+    @RequestMapping("addNewUser")
+    public String addUser(Model model){
+        model.addAttribute("user",new UserDTO());
+        ResponseEntity<CityDTO[]> responseEntity=cityService.findAllCities();
+        model.addAttribute("cities", responseEntity.getBody());
+        return "addUserPage";
+
+    }
+
 }
 
 

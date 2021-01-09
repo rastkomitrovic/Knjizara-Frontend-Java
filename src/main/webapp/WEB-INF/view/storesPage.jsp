@@ -1,9 +1,9 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Rastko
-  Date: 1/2/2021
-  Time: 2:56 PM
+  Date: 1/9/2021
+  Time: 4:15 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,7 +11,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <title>Knjizara</title>
+    <title>Naše radnje</title>
 </head>
 <body class="index-body">
 <nav class="navigation">
@@ -35,7 +35,7 @@
     </div>
     <div class="navigation-right">
         <div class="navigation-right-search">
-            <input type="text" id="search-field" placeholder="Pokušajte: Tolkin" >
+            <input type="text" id="search-field" placeholder="Pokušajte: Tolkin">
             <a href="" id="search-results-page-link">
                 <button>
                     <i class="fa fa-search"></i>
@@ -50,44 +50,39 @@
         </button>
         <section class="navigation-user-dropdown">
             <a href="${pageContext.request.contextPath}/basket">
-                <i class="fa fa-shopping-cart"></i> <p>Korpa</p>
+                <i class="fa fa-shopping-cart"></i>
+                <p>Korpa</p>
             </a>
             <a href="${pageContext.request.contextPath}/userProfile">
-                <i class="fa fa-wrench"></i> <p>Podešavanja</p>
+                <i class="fa fa-wrench"></i>
+                <p>Podešavanja</p>
             </a>
             <a href="${pageContext.request.contextPath}/logout">
-                <i class="fa fa-arrow-right"></i> <p>Izloguj se</p>
+                <i class="fa fa-arrow-right"></i>
+                <p>Izloguj se</p>
             </a>
 
         </section>
     </div>
 </nav>
 
-<section style="width: 90%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; min-height: 70vh">
-    <form:form modelAttribute="author" cssClass="change-profile-info" action="/changeAuthorInfo">
-        <div class="form-control">
-            <label for="name">Ime:</label>
-            <form:input path="firstName" id="name"/>
-        </div>
-        <div class="form-control">
-            <label for="middle-name">Srednje ime:</label>
-            <form:input path="middleName" id="middle-name"/>
-        </div>
-        <div class="form-control">
-            <label for="surname">Prezime:</label>
-            <form:input path="lastName" id="surname"/>
-        </div>
-        <div class="form-control">
-            <label for="description">Opis: </label>
-            <form:textarea path="description" id="description"/>
-        </div>
+<section class="stores-main">
 
-        <div class="form-buttons">
-            <form:button type="submit" class="register-form-btn">Izmeni podatke</form:button>
+    <c:forEach var="store" items="${stores}">
+        <div class="store-card">
+            <img src="${store.images.get(0).imageUrl}">
+            <div class="store-card-info">
+                <h1>${store.storeName}</h1>
+                <h3>${store.address}, ${store.city.cityName}</h3>
+                <p>
+                    ${store.description}
+                </p>
+            </div>
         </div>
-    </form:form>
+    </c:forEach>
 
 </section>
+
 
 <footer class="web-footer">
     <div class="footer-icons">
@@ -99,5 +94,6 @@
 </footer>
 
 <script src="${pageContext.request.contextPath}/js/MainPage.js"></script>
+<script src="${pageContext.request.contextPath}/js/storesScript.js"></script>
 </body>
 </html>
