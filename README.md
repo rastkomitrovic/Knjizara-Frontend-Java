@@ -1,6 +1,7 @@
 # Knjizara-Frontend-Java
-REST Web service of my final exam project.
-The project is a bookstore web application written in Kotlin.
-Some points of improvement for now are to add either basic or OAuth 2.0 authentication,
-improving the logic of storing data (more concretly the comments).
-The project uses Spring framework with Spring Data JPA plugin.
+The "Frontend" part of my final exam project.
+The project is a Java Spring web application which communicates with the REST application.
+It uses the the Spring Secuirty in order to display diferent content on the JSP pages based on the user role.
+Points for improvement here would be to use some JavaScript framework like React or Vue.js.
+The next point to add here is the PayPal payment processor for credit cards,
+finalize a few JSP pages and fix JSON parsing issue for Comment object.
