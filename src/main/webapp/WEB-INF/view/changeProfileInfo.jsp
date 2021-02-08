@@ -26,7 +26,17 @@
         </p>
         <sec:authorize access="hasAuthority('ADMIN')">
             <p class="navigation-element">
-                <a href="${pageContext.request.contextPath}/addNewUser">Dodavanje korisnika</a>
+                <a href="${pageContext.request.contextPath}/addNewUser">Dodaj korisnika</a>
+            </p>
+        </sec:authorize>
+        <sec:authorize access="hasAuthority('ADMIN')">
+            <p class="navigation-element">
+                <a href="${pageContext.request.contextPath}/newBook">Dodaj knjigu</a>
+            </p>
+        </sec:authorize>
+        <sec:authorize access="hasAuthority('ADMIN')">
+            <p class="navigation-element">
+                <a href="${pageContext.request.contextPath}/newAuthor">Dodaj autora</a>
             </p>
         </sec:authorize>
     </div>

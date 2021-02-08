@@ -1,16 +1,22 @@
 package com.fon.knjizarafrontend.fc;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Comment {
-
-    private String username;
-    private Long bookId;
+    @JsonProperty("commentId")
+    private Long commentId;
+    @JsonProperty("text")
     private String text;
-    private Integer rating;
+    @JsonProperty("rating")
+    private Float rating;
+    @JsonProperty("bookId")
+    private Long bookId;
+    @JsonProperty("username")
+    private String username;
 }

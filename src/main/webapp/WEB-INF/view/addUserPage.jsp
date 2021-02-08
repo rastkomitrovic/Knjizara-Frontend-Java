@@ -31,7 +31,17 @@
         </p>
         <sec:authorize access="hasAuthority('ADMIN')">
             <p class="navigation-element">
-                <a href="${pageContext.request.contextPath}/addNewUser">Dodavanje korisnika</a>
+                <a href="${pageContext.request.contextPath}/addNewUser">Dodaj korisnika</a>
+            </p>
+        </sec:authorize>
+        <sec:authorize access="hasAuthority('ADMIN')">
+            <p class="navigation-element">
+                <a href="${pageContext.request.contextPath}/newBook">Dodaj knjigu</a>
+            </p>
+        </sec:authorize>
+        <sec:authorize access="hasAuthority('ADMIN')">
+            <p class="navigation-element">
+                <a href="${pageContext.request.contextPath}/newAuthor">Dodaj autora</a>
             </p>
         </sec:authorize>
     </div>
@@ -64,7 +74,6 @@
         </section>
     </div>
 </nav>
-
 <section style="width: 90%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; min-height: 70vh">
 
     <form:form modelAttribute="user" method="post" cssClass="change-profile-info" action="/saveAuthor">

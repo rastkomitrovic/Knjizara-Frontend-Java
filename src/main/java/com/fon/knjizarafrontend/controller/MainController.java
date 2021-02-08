@@ -1,6 +1,7 @@
 package com.fon.knjizarafrontend.controller;
 
 import com.fon.knjizarafrontend.dto.*;
+import com.fon.knjizarafrontend.fc.Author;
 import com.fon.knjizarafrontend.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -82,17 +83,10 @@ public class MainController {
         return "";
     }
 
-    @RequestMapping("newAuthor")
-    public String addAuthor(Model model){
-        model.addAttribute("author",new AuthorDTO());
-        return "addAuthorPage";
-    }
-
     @RequestMapping("newBook")
     public String addBook(Model model){
         model.addAttribute("book",new BookDTO());
         return "addBookPage";
-
     }
 
     @RequestMapping("addNewUser")

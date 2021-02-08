@@ -1,6 +1,7 @@
 package com.fon.knjizarafrontend.controller;
 
 import com.fon.knjizarafrontend.dto.AuthorDTO;
+import com.fon.knjizarafrontend.fc.Author;
 import com.fon.knjizarafrontend.service.AuthorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,12 @@ import javax.annotation.Resource;
 public class AuthorController {
     @Resource
     private AuthorService authorService;
+
+    @RequestMapping("newAuthor")
+    public String addAuthor(Model model){
+        model.addAttribute("author",new Author());
+        return "addAuthorPage";
+    }
 
     @RequestMapping("/deleteAuthor/{id}")
     public String deleteAuthor(@PathVariable Long id, Model model){

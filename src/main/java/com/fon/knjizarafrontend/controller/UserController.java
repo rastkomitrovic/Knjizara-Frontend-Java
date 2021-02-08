@@ -6,7 +6,6 @@ import com.fon.knjizarafrontend.editor.CityEditor;
 import com.fon.knjizarafrontend.fc.ChangeUserInfo;
 import com.fon.knjizarafrontend.service.CityService;
 import com.fon.knjizarafrontend.service.UserService;
-import javafx.scene.control.TextFormatter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
-import javax.xml.ws.Response;
 
 @Controller
 public class UserController {

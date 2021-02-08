@@ -29,13 +29,23 @@
         </p>
         <sec:authorize access="hasAuthority('ADMIN')">
             <p class="navigation-element">
-                <a href="${pageContext.request.contextPath}/addNewUser">Dodavanje korisnika</a>
+                <a href="${pageContext.request.contextPath}/addNewUser">Dodaj korisnika</a>
+            </p>
+        </sec:authorize>
+        <sec:authorize access="hasAuthority('ADMIN')">
+            <p class="navigation-element">
+                <a href="${pageContext.request.contextPath}/newBook">Dodaj knjigu</a>
+            </p>
+        </sec:authorize>
+        <sec:authorize access="hasAuthority('ADMIN')">
+            <p class="navigation-element">
+                <a href="${pageContext.request.contextPath}/newAuthor">Dodaj autora</a>
             </p>
         </sec:authorize>
     </div>
     <div class="navigation-right">
         <div class="navigation-right-search">
-            <input type="text" id="search-field" placeholder="Pokušajte: Tolkin">
+            <input type="text" id="search-field" placeholder="Pokušajte: Tolkin" >
             <a href="" id="search-results-page-link">
                 <button>
                     <i class="fa fa-search"></i>
@@ -50,16 +60,13 @@
         </button>
         <section class="navigation-user-dropdown">
             <a href="${pageContext.request.contextPath}/basket">
-                <i class="fa fa-shopping-cart"></i>
-                <p>Korpa</p>
+                <i class="fa fa-shopping-cart"></i> <p>Korpa</p>
             </a>
             <a href="${pageContext.request.contextPath}/userProfile">
-                <i class="fa fa-wrench"></i>
-                <p>Podešavanja</p>
+                <i class="fa fa-wrench"></i> <p>Podešavanja</p>
             </a>
             <a href="${pageContext.request.contextPath}/logout">
-                <i class="fa fa-arrow-right"></i>
-                <p>Izloguj se</p>
+                <i class="fa fa-arrow-right"></i> <p>Izloguj se</p>
             </a>
 
         </section>
