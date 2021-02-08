@@ -17,7 +17,7 @@ public class AuthorController {
     @Resource
     private AuthorService authorService;
 
-    @RequestMapping("newAuthor")
+    @RequestMapping("/newAuthor")
     public String addAuthor(Model model){
         model.addAttribute("author",new Author());
         return "addAuthorPage";

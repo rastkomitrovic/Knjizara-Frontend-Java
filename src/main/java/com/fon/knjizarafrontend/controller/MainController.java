@@ -83,11 +83,6 @@ public class MainController {
         return "";
     }
 
-    @RequestMapping("newBook")
-    public String addBook(Model model){
-        model.addAttribute("book",new BookDTO());
-        return "addBookPage";
-    }
 
     @RequestMapping("addNewUser")
     public String addUser(Model model){

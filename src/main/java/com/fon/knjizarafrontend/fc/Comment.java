@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Comment {
-    @JsonProperty("commentId")
-    private Long commentId;
     @JsonProperty("text")
     private String text;
     @JsonProperty("rating")

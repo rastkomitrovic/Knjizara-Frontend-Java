@@ -37,7 +37,6 @@ public class ProductDetailPageController {
             BookDTO book = response.getBody();
             model.addAttribute("book",book);
             Comment comment=new Comment();
-            comment.setCommentId(-1L);
             comment.setBookId(bookId);
             comment.setUsername(username);
             model.addAttribute("comment",comment);
@@ -61,7 +60,6 @@ public class ProductDetailPageController {
         ResponseEntity<BookDTO> responseBookNew=bookService.findBookByBookId(comment.getBookId());
         model.addAttribute("book",responseBookNew.getBody());
         Comment newComment=new Comment();
-        newComment.setCommentId(-1L);
         newComment.setBookId(comment.getBookId());
         newComment.setUsername(comment.getUsername());
         model.addAttribute("comment",newComment);
