@@ -83,3 +83,11 @@ async function computePrice(){
     }
     localStorage.setItem("totalSum",JSON.stringify(price))
 }
+
+const orderBtn = document.querySelector(".basket-finalize");
+
+orderBtn.addEventListener("click", () => {
+    orderBtn.style = "display: none;"
+    document.querySelector(".basket-wrapper").style = "display: none;"
+    document.querySelector(".order-checkout").style = "display: flex;"
+})

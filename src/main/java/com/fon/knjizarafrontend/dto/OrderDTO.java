@@ -15,7 +15,7 @@ import java.util.List;
 @ToString
 public class OrderDTO {
     @JsonProperty("orderId")
-    private Long orderId;
+    private String orderId;
     @JsonProperty("user")
     private UserDTO user;
     @JsonProperty("orderItems")

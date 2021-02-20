@@ -1200,5 +1200,16 @@ html {
     grid-row-end: 9;
 }
 
+.order-checkout{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+}
+
+#paypal-button-container{
+    min-width: 50vw !important;
+}
+
 
 

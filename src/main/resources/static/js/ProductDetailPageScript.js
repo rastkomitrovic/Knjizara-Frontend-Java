@@ -68,7 +68,7 @@ async function addToBasket(bookId){
     const isAvailable = await checkAvailableQantity(bookId, quantity)
     console.log(isAvailable)
     if(isAvailable === true){
-        basketArr.push({bookId, quantity, active: true});
+        basketArr.push({bookId, quantity});
         localStorage.removeItem("myBasket");
         localStorage.setItem("myBasket", JSON.stringify(basketArr));
         backToMain()

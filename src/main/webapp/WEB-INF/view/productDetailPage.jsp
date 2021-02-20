@@ -149,6 +149,8 @@
                 style="color: var(--color-accent); font-size: 1.5rem">Jezik:</span> ${book.language.toString()}</p>
         <p class="details-info-about"><span
                 style="color: var(--color-accent); font-size: 1.5rem">Opis:</span> ${book.description}</p>
+        <p class="details-info-lang"><span
+                style="color: var(--color-accent); font-size: 1.5rem">Cena:</span> ${book.price}</p>
         <p class="details-info-rating"><span
                 style="color: var(--color-accent); font-size: 1.5rem">Ocena:</span> ${book.rating}</p>
         <label for="input-quantity" class="quantity-label">Količina:</label>

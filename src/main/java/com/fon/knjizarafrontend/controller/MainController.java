@@ -1,13 +1,15 @@
 package com.fon.knjizarafrontend.controller;
 
 import com.fon.knjizarafrontend.dto.*;
-import com.fon.knjizarafrontend.fc.Author;
+import com.fon.knjizarafrontend.request.OrderRequest;
 import com.fon.knjizarafrontend.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
@@ -38,7 +40,7 @@ public class MainController {
     private CityService cityService;
 
     @Resource
-    private BasketService basketService;
+    private OrderService orderService;
 
     @Resource
     private PasswordEncoder passwordEncoder;
@@ -67,6 +69,14 @@ public class MainController {
     @RequestMapping(value = "/basket")
     public String basketPage() {
         return "basket";
+    }
+
+    @PostMapping(path = "/processOrder")
+    public String processOrder(@RequestBody OrderRequest orderRequest , Model model, Principal principal){
+        orderRequest.setUsername(principal.getName());
+        System.out.println(orderRequest);
+
+        return  helloPage(model,principal);
     }
 
     @RequestMapping(value = "/aboutUs")

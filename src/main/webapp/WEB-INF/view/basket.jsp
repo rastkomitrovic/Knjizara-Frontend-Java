@@ -79,7 +79,7 @@
 <section class="basket-wrapper">
 
 </section>
-<section class="payment">
+<section class="order-checkout">
     <div id="paypal-button-container"></div>
 </section>
 
@@ -112,7 +112,8 @@
             // This function captures the funds from the transaction.
             return actions.order.capture().then(function(details) {
                 // This function shows a transaction success message to your buyer.
-                console.log(details)
+                localStorage.setItem("details", JSON.stringify(details))
+                window.location = "http://localhost:9099/mainPage"
                 alert('Transaction completed by ' + details.payer.name.given_name + " amount "+details.amount);
             });
         }
