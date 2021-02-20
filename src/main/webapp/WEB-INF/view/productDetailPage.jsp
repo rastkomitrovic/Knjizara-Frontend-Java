@@ -174,7 +174,6 @@
     <form:form cssClass="new-comment-form" method="post" modelAttribute="comment"
                action="${pageContext.request.contextPath}/p/postComment">
         <label for="new-comment" class="new-comment-label">Ostavi komentar:</label>
-        <form:hidden path="commentId"/>
         <form:hidden path="bookId"/>
         <form:hidden path="username"/>
         <form:textarea path="text" cssClass="comment-text" rows="4" cols="50" id="new-comment"/>

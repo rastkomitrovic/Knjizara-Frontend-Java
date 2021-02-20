@@ -1,7 +1,7 @@
 package com.fon.knjizarafrontend.service.impl;
 
 import com.fon.knjizarafrontend.constants.ApiConstants;
-import com.fon.knjizarafrontend.dto.BasketDTO;
+import com.fon.knjizarafrontend.dto.OrderDTO;
 import com.fon.knjizarafrontend.service.BasketService;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -18,20 +18,20 @@ public class BasketServiceImpl implements BasketService {
     private final String api = ApiConstants.basketsApi;
 
     @Override
-    public ResponseEntity<BasketDTO> findBasketByUserUsername(String username) {
-        return restTemplate.getForEntity(api + "/" + username, BasketDTO.class);
+    public ResponseEntity<OrderDTO> findBasketByUserUsername(String username) {
+        return restTemplate.getForEntity(api + "/" + username, OrderDTO.class);
     }
 
     @Override
-    public ResponseEntity<Object> saveBasket(BasketDTO basketDTO) {
-        return restTemplate.postForEntity(api, basketDTO, Object.class);
+    public ResponseEntity<Object> saveBasket(OrderDTO orderDTO) {
+        return restTemplate.postForEntity(api, orderDTO, Object.class);
     }
 
     @Override
-    public ResponseEntity<Object> updateBasket(BasketDTO basketDTO) {
+    public ResponseEntity<Object> updateBasket(OrderDTO orderDTO) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<BasketDTO> entity = new HttpEntity<>(basketDTO, headers);
+        HttpEntity<OrderDTO> entity = new HttpEntity<>(orderDTO, headers);
         return restTemplate.exchange(api, HttpMethod.PUT, entity, Object.class);
     }
 

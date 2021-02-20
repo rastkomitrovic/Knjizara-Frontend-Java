@@ -10,15 +10,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class BasketEntryDTO {
-    @JsonProperty("entryId")
-    private Long entryId;
+public class OrderItemDTO {
+    @JsonProperty("itemId")
+    private Long itemId;
     @JsonProperty("book")
     private BookDTO book;
-    @JsonProperty("basket")
-    private BasketDTO basket;
+    @JsonProperty("order")
+    private OrderDTO order;
     @JsonProperty("quantity")
     private Long quantity;
-    @JsonProperty("active")
-    private Boolean active;
 }

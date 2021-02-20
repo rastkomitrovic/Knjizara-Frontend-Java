@@ -1,14 +1,14 @@
 package com.fon.knjizarafrontend.service;
 
-import com.fon.knjizarafrontend.dto.BasketDTO;
+import com.fon.knjizarafrontend.dto.OrderDTO;
 import org.springframework.http.ResponseEntity;
 
 public interface BasketService {
-    ResponseEntity<BasketDTO> findBasketByUserUsername(String username);
+    ResponseEntity<OrderDTO> findBasketByUserUsername(String username);
 
-    ResponseEntity<Object> saveBasket(BasketDTO basketDTO);
+    ResponseEntity<Object> saveBasket(OrderDTO orderDTO);
 
-    ResponseEntity<Object> updateBasket(BasketDTO basketDTO);
+    ResponseEntity<Object> updateBasket(OrderDTO orderDTO);
 
     ResponseEntity<Object> deleteBasket(long basketId);
 }

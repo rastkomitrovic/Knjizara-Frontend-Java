@@ -10,6 +10,8 @@
 <head>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ensures optimal rendering on mobile devices. -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Title</title>
 </head>
 <body class="basket-body">
@@ -77,6 +79,9 @@
 <section class="basket-wrapper">
 
 </section>
+<section class="payment">
+    <div id="paypal-button-container"></div>
+</section>
 
 <button class="basket-finalize">Naruči</button>
 
@@ -89,8 +94,32 @@
     <a href="${pageContext.request.contextPath}/stores">Voliš miris knjiga? Poseti naše radnje!</a>
 </footer>
 
-</body>
+<script src="https://www.paypal.com/sdk/js?client-id=ASCfT8ZkLed2x1tBOjsjHza0z7vTj2zkaw5nMeEbufNY5LF4zmY7mMpQKTEuvI8mE1o7Bah3Q1O3lx2I"></script>
 
+<script>
+    paypal.Buttons({
+        createOrder: function(data, actions) {
+            let price= JSON.parse(localStorage.getItem("totalSum"))
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: price
+                    }
+                }]
+            });
+        },
+        onApprove: function(data, actions) {
+            // This function captures the funds from the transaction.
+            return actions.order.capture().then(function(details) {
+                // This function shows a transaction success message to your buyer.
+                console.log(details)
+                alert('Transaction completed by ' + details.payer.name.given_name + " amount "+details.amount);
+            });
+        }
+    }).render('#paypal-button-container');
+    //This function displays Smart Payment Buttons on your web page.
+</script>
+</body>
 <script src="${pageContext.request.contextPath}/js/Utils/checkAvailableQuantity.js"></script>
 <script src="${pageContext.request.contextPath}/js/MainPage.js"></script>
 <script src="${pageContext.request.contextPath}/js/basketPage.js"></script>

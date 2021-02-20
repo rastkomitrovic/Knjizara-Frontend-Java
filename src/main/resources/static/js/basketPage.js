@@ -1,17 +1,21 @@
 
 async function renderBasket(){
     let booksBasket = JSON.parse(localStorage.getItem("myBasket"))
+    var price=0
     if(booksBasket.length===0){
         document.querySelector(".basket-wrapper").innerHTML = "<h3>Korpa je prazna</h3>";
         return;
     }
+
     let booksArr = [];
     let booksHtml = "";
     for(book of booksBasket){
         const res = await fetch(`http://localhost:9090/api/v0/books/${book.bookId}`)
         const singleBook = await res.json();
+        price=price+singleBook.price*book.quantity
         booksArr.push({book: singleBook, quantity: book.quantity})
     }
+    localStorage.setItem("totalSum",JSON.stringify(price))
     booksArr.forEach((book, i) => {
         booksHtml = booksHtml + `
     <div class="basket-single-item">
@@ -48,18 +52,34 @@ async function changeQuantity(book, q){
     let r = parseInt(q)
     let res = p + r
     document.getElementById(book).value = res
+    await computePrice()
 
 }
 
 async function deleteFromBasket(book){
-    const basketBooks = JSON.parse(localStorage.getItem("myBasket"));
+    const basketBooks = JSON.parse(localStorage.getItem("myBasket"))
     basketBooks.splice(book, 1)
 
     localStorage.removeItem("myBasket")
     localStorage.setItem("myBasket", JSON.stringify(basketBooks))
 
 
+    await computePrice()
     await renderBasket()
 }
 
 renderBasket();
+
+async function computePrice(){
+    let booksBasket = JSON.parse(localStorage.getItem("myBasket"))
+    var price=0
+    if(booksBasket.length===0){
+        return
+    }
+    for(book of booksBasket){
+        const res = await fetch(`http://localhost:9090/api/v0/books/${book.bookId}`)
+        const singleBook = await res.json()
+        price=price+ singleBook.price * book.quantity
+    }
+    localStorage.setItem("totalSum",JSON.stringify(price))
+}

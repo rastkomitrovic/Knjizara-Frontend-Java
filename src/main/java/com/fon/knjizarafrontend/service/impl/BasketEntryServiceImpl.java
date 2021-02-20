@@ -2,7 +2,7 @@ package com.fon.knjizarafrontend.service.impl;
 
 import com.fon.knjizarafrontend.constants.ApiConstants;
 import com.fon.knjizarafrontend.constants.RestPageImpl;
-import com.fon.knjizarafrontend.dto.BasketEntryDTO;
+import com.fon.knjizarafrontend.dto.OrderItemDTO;
 import com.fon.knjizarafrontend.service.BasketEntryService;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -20,22 +20,22 @@ public class BasketEntryServiceImpl implements BasketEntryService {
     private final String api = ApiConstants.basketEntriesApi;
 
     @Override
-    public ResponseEntity<RestPageImpl<BasketEntryDTO>> findEntriesByBasketId(long basketId, int page, int size, String sort, boolean active) {
-        ParameterizedTypeReference<RestPageImpl<BasketEntryDTO>> responseType = new ParameterizedTypeReference<RestPageImpl<BasketEntryDTO>>() {
+    public ResponseEntity<RestPageImpl<OrderItemDTO>> findEntriesByBasketId(long basketId, int page, int size, String sort, boolean active) {
+        ParameterizedTypeReference<RestPageImpl<OrderItemDTO>> responseType = new ParameterizedTypeReference<RestPageImpl<OrderItemDTO>>() {
         };
         return restTemplate.exchange(api + "/" + basketId + "/" + page + "/" + size + "/" + sort + "/" + active, HttpMethod.GET, null, responseType);
     }
 
     @Override
-    public ResponseEntity<Object> saveBasketEntry(BasketEntryDTO basketEntryDTO) {
-        return restTemplate.postForEntity(api, basketEntryDTO, Object.class);
+    public ResponseEntity<Object> saveBasketEntry(OrderItemDTO orderItemDTO) {
+        return restTemplate.postForEntity(api, orderItemDTO, Object.class);
     }
 
     @Override
-    public ResponseEntity<Object> updateBasketEntry(BasketEntryDTO basketEntryDTO) {
+    public ResponseEntity<Object> updateBasketEntry(OrderItemDTO orderItemDTO) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<BasketEntryDTO> entity = new HttpEntity<>(basketEntryDTO, headers);
+        HttpEntity<OrderItemDTO> entity = new HttpEntity<>(orderItemDTO, headers);
         return restTemplate.exchange(api, HttpMethod.PUT, entity, Object.class);
     }
 
