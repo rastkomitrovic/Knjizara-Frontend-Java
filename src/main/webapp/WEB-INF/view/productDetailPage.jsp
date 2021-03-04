@@ -7,7 +7,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <title>Knjizara</title>
+    <title>${book.bookName}</title>
 </head>
 
 <body class="index-body">
@@ -37,6 +37,11 @@
         <sec:authorize access="hasAuthority('ADMIN')">
             <p class="navigation-element">
                 <a href="${pageContext.request.contextPath}/newAuthor">Dodaj autora</a>
+            </p>
+        </sec:authorize>
+        <sec:authorize access="isAuthenticated()">
+            <p class="navigation-element">
+                <a href="${pageContext.request.contextPath}/orders/0/15/dateCreated">Pregledaj narudzbine</a>
             </p>
         </sec:authorize>
     </div>

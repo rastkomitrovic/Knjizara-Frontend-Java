@@ -39,10 +39,15 @@
                 <a href="${pageContext.request.contextPath}/newAuthor">Dodaj autora</a>
             </p>
         </sec:authorize>
+        <sec:authorize access="isAuthenticated()">
+            <p class="navigation-element">
+                <a href="${pageContext.request.contextPath}/orders/0/15/dateCreated">Pregledaj narudzbine</a>
+            </p>
+        </sec:authorize>
     </div>
     <div class="navigation-right">
         <div class="navigation-right-search">
-            <input type="text" id="search-field" placeholder="Pokušajte: Tolkin" >
+            <input type="text" id="search-field" placeholder="Pokušajte: Tolkin">
             <a href="" id="search-results-page-link">
                 <button>
                     <i class="fa fa-search"></i>
@@ -57,13 +62,16 @@
         </button>
         <section class="navigation-user-dropdown">
             <a href="${pageContext.request.contextPath}/basket">
-                <i class="fa fa-shopping-cart"></i> <p>Korpa</p>
+                <i class="fa fa-shopping-cart"></i>
+                <p>Korpa</p>
             </a>
             <a href="${pageContext.request.contextPath}/userProfile">
-                <i class="fa fa-wrench"></i> <p>Podešavanja</p>
+                <i class="fa fa-wrench"></i>
+                <p>Podešavanja</p>
             </a>
             <a href="${pageContext.request.contextPath}/logout">
-                <i class="fa fa-arrow-right"></i> <p>Izloguj se</p>
+                <i class="fa fa-arrow-right"></i>
+                <p>Izloguj se</p>
             </a>
 
         </section>
@@ -111,9 +119,18 @@
                     <form:form onsubmit="return checkCurrent(${i-1})" style="display: inline"
                                action="${pageContext.request.contextPath}/search/${i-1}/${size}/${sort}/${searchType}/${searchParam}"
                                method="get">
-                        <button type="submit" class="results-nav-btn">
-                                ${i}
-                        </button>
+                        <c:choose>
+                            <c:when test="${i eq currentPage}">
+                                <button disabled class="results-nav-btn-bold">
+                                        ${i}
+                                </button>
+                            </c:when>
+                            <c:otherwise>
+                                <button type="submit" class="results-nav-btn">
+                                        ${i}
+                                </button>
+                            </c:otherwise>
+                        </c:choose>
                     </form:form>
                 </c:forEach>
                 <form:form onsubmit="return checkNext()" style="display: inline"
@@ -127,7 +144,7 @@
     </c:when>
 
     <c:otherwise>
-        <h1 class="search-result-heading">Nije pronadjena nijedna knjiga po zadatom kriterijumu</h1>
+        <h1 class="search-result-heading">Nije pronadjena nijedna narudzbina za vas nalog</h1>
     </c:otherwise>
 </c:choose>
 
@@ -145,7 +162,6 @@
     const isLast =${isLastPage};
     const currentPage =
     ${currentPage}
-
 </script>
 <script src="${pageContext.request.contextPath}/js/MainPage.js"></script>
 <script src="${pageContext.request.contextPath}/js/SearchResultPageScript.js"></script>

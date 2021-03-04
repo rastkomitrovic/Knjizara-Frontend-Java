@@ -5,7 +5,7 @@ public class ApiConstants {
     public static final String countriesApi = apiBase + "countries";
     public static final String authorsApi = apiBase + "authors";
     public static final String basketEntriesApi = apiBase + "basketEntries";
-    public static final String basketsApi = apiBase + "baskets";
+    public static final String basketsApi = apiBase + "orders";
     public static final String bookImagesApi = apiBase + "bookImages";
     public static final String booksApi = apiBase + "books";
     public static final String citiesApi = apiBase + "cities";

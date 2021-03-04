@@ -62,7 +62,7 @@ public class SearchResultController {
         model.addAttribute("isFirst", restPage.isFirst());
         model.addAttribute("totalPages",restPage.getTotalPages());
         model.addAttribute("currentPage", restPage.getNumber());
-        model.addAttribute("books", restPage.getContent() != null ? restPage.getContent() : new LinkedList<>());
+        model.addAttribute("books", restPage.getContent());
         return "searchResultPage";
     }
 }

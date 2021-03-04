@@ -6,13 +6,15 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ensures optimal rendering on mobile devices. -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Title</title>
+    <title>Korpa</title>
 </head>
 <body class="basket-body">
 
@@ -42,6 +44,11 @@
         <sec:authorize access="hasAuthority('ADMIN')">
             <p class="navigation-element">
                 <a href="${pageContext.request.contextPath}/newAuthor">Dodaj autora</a>
+            </p>
+        </sec:authorize>
+        <sec:authorize access="isAuthenticated()">
+            <p class="navigation-element">
+                <a href="${pageContext.request.contextPath}/orders/0/15/dateCreated">Pregledaj narudzbine</a>
             </p>
         </sec:authorize>
     </div>
@@ -74,7 +81,6 @@
         </section>
     </div>
 </nav>
-
 
 <section class="basket-wrapper">
 

@@ -55,16 +55,20 @@ document.body.addEventListener("click", () => {
     document.getElementById("search-field").value = ""
 })
 
-window.onload =  async function() {
+window.onload = async function () {
     let myBasket = JSON.parse(localStorage.getItem("myBasket"))
     let details = JSON.parse(localStorage.getItem("details"))
     console.log("ovde")
-    await fetch("http://localhost:9099/processOrder", {method: "POST", body: JSON.stringify({
-            orderId: details.id,
-            items: myBasket
-        }),  headers: {
-            'Content-Type': 'application/json'
-        },})
+    if (myBasket != null && details != null) {
+        await fetch("http://localhost:9099/processOrder", {
+            method: "POST", body: JSON.stringify({
+                orderId: details.id,
+                items: myBasket
+            }), headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+    }
 }
 
 

@@ -1,9 +1,13 @@
 package com.fon.knjizarafrontend.service.impl;
 
 import com.fon.knjizarafrontend.constants.ApiConstants;
+import com.fon.knjizarafrontend.constants.RestPageImpl;
+import com.fon.knjizarafrontend.dto.BookDTO;
 import com.fon.knjizarafrontend.dto.OrderDTO;
 import com.fon.knjizarafrontend.request.OrderRequest;
 import com.fon.knjizarafrontend.service.OrderService;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.data.domain.Page;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -19,8 +23,10 @@ public class OrderServiceImpl implements OrderService {
     private final String api = ApiConstants.basketsApi;
 
     @Override
-    public ResponseEntity<OrderDTO[]> findOrdersByUsername(String username) {
-        return restTemplate.getForEntity(api + "/" + username, OrderDTO[].class);
+    public ResponseEntity<RestPageImpl<OrderDTO>> findOrdersByUsername(String username, int page, int size, String sort) {
+        ParameterizedTypeReference<RestPageImpl<OrderDTO>> responseType = new ParameterizedTypeReference<RestPageImpl<OrderDTO>>() {
+        };
+        return restTemplate.exchange(api + "/" + username + "/" + page + "/" + size + "/" + sort, HttpMethod.GET, null, responseType);
     }
 
     @Override
@@ -30,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public ResponseEntity<OrderDTO> findOrderByOrderId(String orderId) {
-        return restTemplate.getForEntity(api+"/id/"+orderId,OrderDTO.class);
+        return restTemplate.getForEntity(api + "/id/" + orderId, OrderDTO.class);
     }
 
 

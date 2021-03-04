@@ -44,6 +44,11 @@
                 <a href="${pageContext.request.contextPath}/newAuthor">Dodaj autora</a>
             </p>
         </sec:authorize>
+        <sec:authorize access="isAuthenticated()">
+            <p class="navigation-element">
+                <a href="${pageContext.request.contextPath}/orders/0/15/dateCreated">Pregledaj narudzbine</a>
+            </p>
+        </sec:authorize>
     </div>
     <div class="navigation-right">
         <div class="navigation-right-search">

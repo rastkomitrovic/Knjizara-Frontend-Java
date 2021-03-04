@@ -1,15 +1,21 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Rastko
+  Date: 2/21/2021
+  Time: 3:55 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
+    <title>Narudzbine</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <title>Knjizara</title>
 </head>
-
-<body class="index-body">
+<body>
 <nav class="navigation">
     <div class="navigation-left">
         <p>
@@ -74,62 +80,54 @@
     </div>
 </nav>
 
-<section class="index-wrapper">
+<c:choose>
+    <c:when test="${!isEmpty}">
+        <h1 class="search-result-heading">Pronadjeno je ukupno: ${totalNumberOfFoundElements}</h1>
+        <section class="products-wrapper products-wrapper-search">
+            <c:forEach items="${orders}" var="order">
 
-    <section class="genres-wrapper">
-        <h3>Pretražuj po:
-            <select id="genres-or-authors">
-                <option value="1" selected="selected">žanru</option>
-                <option value="2">autorima</option>
-            </select>
-        </h3>
-        <div id="main-genres">
-            <c:forEach var="genre" items="${genres}">
-                <a href="${pageContext.request.contextPath}/search/0/15/bookName/Genre/${genre.genreId}">${genre.genreName}</a>
             </c:forEach>
+        </section>
+        <div class="pages-navigation">
+            <c:if test="${totalPages>1}">
+                <form:form onsubmit="return checkPrevious()" style="display: inline"
+                           action="${pageContext.request.contextPath}/orders/${currentPage-1}/${size}/${sort}"
+                           method="get">
+                    <button type="submit" class="results-prevnext-btn"><i class="fa fa-chevron-left"
+                                                                          id="previous-btn"></i></button>
+                </form:form>
+                <c:forEach var="i" begin="1" end="${totalPages}">
+                    <form:form onsubmit="return checkCurrent(${i-1})" style="display: inline"
+                               action="${pageContext.request.contextPath}/orders/${i-1}/${size}/${sort}"
+                               method="get">
+                        <c:choose>
+                            <c:when test="${i eq currentPage}">
+                                <button disabled class="results-nav-btn-bold">
+                                        ${i}
+                                </button>
+                            </c:when>
+                            <c:otherwise>
+                                <button type="submit" class="results-nav-btn">
+                                        ${i}
+                                </button>
+                            </c:otherwise>
+                        </c:choose>
+                    </form:form>
+                </c:forEach>
+                <form:form onsubmit="return checkNext()" style="display: inline"
+                           action="${pageContext.request.contextPath}/search/${currentPage+1}/${size}/${sort}/${searchType}/${searchParam}"
+                           method="get">
+                    <button type="submit" class="results-prevnext-btn" id="next-btn"><i class="fa fa-chevron-right"></i>
+                    </button>
+                </form:form>
+            </c:if>
         </div>
-       <div id="main-authors">
-           <sec:authorize access="hasAuthority('ADMIN')">
-               <c:forEach var="author" items="${authors}">
-                   <a onclick="openModal(${author.authorId} , '${author.firstName}' , '${author.lastName}')">${author.firstName} ${author.middleName} ${author.lastName}</a>
-               </c:forEach>
-           </sec:authorize>
-           <sec:authorize access="hasAuthority('USER')">
-               <c:forEach var="author" items="${authors}">
-                   <a href="${pageContext.request.contextPath}/search/0/15/bookName/Author/${author.authorId}">${author.firstName} ${author.middleName} ${author.lastName}</a>
-               </c:forEach>
-           </sec:authorize>
-       </div>
+    </c:when>
 
-    </section>
-
-    <section class="products-wrapper products-wrapper-main">
-        <c:forEach items="${books}" var="book">
-            <div class="product-card product-card-main">
-                <c:if test="${book.images.size() ge 1}">
-                    <img src="${book.images.get(0).imageUrl}" class="product-card-img"/>
-                </c:if>
-                <div class="product-card-name-review">
-                    <h2 class="product-card-name">${book.bookName}</h2>
-                    <p class="product-card-review"><i class="fa fa-star" aria-hidden="true"></i>${book.rating}</p>
-                </div>
-                <h4 class="product-card-author">
-                    <c:forEach items="${book.authors}" var="author">
-                        <p>${author.firstName} ${author.middleName} ${author.lastName}</p>
-                        <br>
-                    </c:forEach>
-                </h4>
-                <div class="product-card-price-details">
-                    <p class="product-card-price">${book.price}</p>
-                    <a href="${pageContext.request.contextPath}/p/${book.bookId}">
-                        <button class="product-card-details">Detalji</button>
-                    </a>
-                </div>
-            </div>
-        </c:forEach>
-    </section>
-
-</section>
+    <c:otherwise>
+        <h1 class="search-result-heading">Nije pronadjena nijedna knjiga po zadatom kriterijumu</h1>
+    </c:otherwise>
+</c:choose>
 
 <footer class="web-footer">
     <div class="footer-icons">
@@ -139,27 +137,12 @@
     </div>
     <a href="${pageContext.request.contextPath}/stores">Voliš miris knjiga? Poseti naše radnje!</a>
 </footer>
-
+<script>
+    const isFirst =${isFirst};
+    const isLast =${isLastPage};
+    const currentPage =${currentPage}
+</script>
 <script src="${pageContext.request.contextPath}/js/MainPage.js"></script>
-<script src="${pageContext.request.contextPath}/js/GenresAuthorNavigationScript.js"></script>
+<script src="${pageContext.request.contextPath}/js/SearchResultPageScript.js"></script>
 </body>
 </html>
-
-
-<!--
-<section class="products-wrapper">
-<div class="product-card">
-<img src="https://www.laguna.rs/_img/korice/4175/zlocin_i_kazna-fjodor_mihailovic_dostojevski_v.jpg" class="product-card-img"/>
-<div class="product-card-name-review">
-<h2 class="product-card-name">Ime knjige</h2>
-<p class="product-card-review">4.6</p>
-</div>
-<h4 class="product-card-author">Autor</h4>
-<h6 class="product-card-isbn">ISBN broj</h6>
-<div class="product-card-price-details">
-<p class="product-card-price">499,99</p>
-<button class="product-card-details">Detalji</button>
-</div>
-</div>
-</section>
--->

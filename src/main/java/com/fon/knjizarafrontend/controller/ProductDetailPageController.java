@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,5 +67,11 @@ public class ProductDetailPageController {
         model.addAttribute("availableRatingsInts", PageConstants.availableRatingsInts);
         model.addAttribute("availableRatingsFloats",PageConstants.availableRatingsFloats);
         return "productDetailPage";
+    }
+
+    @GetMapping("/p/deleteComment/{bookId}/{commentId}")
+    public String deleteComment(Model model, @PathVariable long bookId, @PathVariable long commentId){
+        commentService.deleteComment(commentId);
+        return productDetailPage(bookId,model);
     }
 }

@@ -590,6 +590,19 @@ html {
     cursor: pointer;
 }
 
+.results-nav-btn-bold{
+    border: 1px solid var(--color-grey-dark);
+    border-radius: 5px;
+    padding: 1rem;
+    font-size: 1.5rem;
+    text-align: center;
+    width: 4rem;
+    height: 4.5rem;
+    cursor: pointer;
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+}
+
 .results-nav-btn:hover{
     background-color: var(--color-primary);
     color: var(--color-secondary);
