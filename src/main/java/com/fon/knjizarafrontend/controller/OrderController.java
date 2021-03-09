@@ -25,13 +25,11 @@ public class OrderController {
     }
 
     @PostMapping(path = "/processOrder")
-    public void processOrder(@RequestBody OrderRequest orderRequest , Model model, Principal principal){
+    public ResponseEntity<Object> processOrder(@RequestBody OrderRequest orderRequest , Model model, Principal principal){
         orderRequest.setUsername(principal.getName());
 
         ResponseEntity<Object> responseEntity=orderService.saveOrder(orderRequest);
-        System.out.println(responseEntity.getStatusCode());
-
-        //return  helloPage(model,principal);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @GetMapping("/orders/{page}/{size}/{sort}")

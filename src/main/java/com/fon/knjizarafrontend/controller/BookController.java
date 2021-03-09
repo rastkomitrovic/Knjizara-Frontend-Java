@@ -1,7 +1,7 @@
 package com.fon.knjizarafrontend.controller;
 
+import com.fon.knjizarafrontend.constants.Language;
 import com.fon.knjizarafrontend.dto.AuthorDTO;
-import com.fon.knjizarafrontend.dto.BookDTO;
 import com.fon.knjizarafrontend.dto.GenreDTO;
 import com.fon.knjizarafrontend.dto.PublisherDTO;
 import com.fon.knjizarafrontend.fc.Book;
@@ -9,12 +9,17 @@ import com.fon.knjizarafrontend.service.AuthorService;
 import com.fon.knjizarafrontend.service.BookService;
 import com.fon.knjizarafrontend.service.GenreService;
 import com.fon.knjizarafrontend.service.PublisherService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
@@ -34,10 +39,37 @@ public class BookController {
     @Resource
     private GenreService genreService;
 
+    @InitBinder
+    public void initBinder(WebDataBinder webDataBinder){
+
+    }
 
     @RequestMapping("/newBook")
     public String addBook(Model model){
         model.addAttribute("book",new Book());
+
+        ResponseEntity<PublisherDTO[]> publishersResponse=publisherService.getAllPublishers();
+        ResponseEntity<AuthorDTO[]> authorsResponse=authorService.findAllAuthorsNoPaging();
+        ResponseEntity<GenreDTO[]> genresResponse=genreService.getAllGenresNoPaging();
+        model.addAttribute("errorMessage", "");
+        if(publishersResponse.getStatusCode()== HttpStatus.OK && authorsResponse.getStatusCode()==HttpStatus.OK && genresResponse.getStatusCode()==HttpStatus.OK){
+            model.addAttribute("publishers", Arrays.asList(publishersResponse.getBody()));
+            model.addAttribute("authors", Arrays.asList(authorsResponse.getBody()));
+            model.addAttribute("genres",Arrays.asList(genresResponse.getBody()));
+            model.addAttribute("languages", Language.values());
+            return "addBookPage";
+        }
+        return "errorPageNewBook";
+
+    }
+
+    @PostMapping(path = "/saveBook", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String saveBook(Book book, Model model){
+        ResponseEntity<Object> responseEntity=bookService.saveBook(book);
+        if(responseEntity.getStatusCode()==HttpStatus.OK)
+            return "redirect:/mainPage";
+        model.addAttribute("errorMessage", "Some error message");
+        model.addAttribute("book",book);
 
         ResponseEntity<PublisherDTO[]> publishersResponse=publisherService.getAllPublishers();
         ResponseEntity<AuthorDTO[]> authorsResponse=authorService.findAllAuthorsNoPaging();
@@ -47,9 +79,9 @@ public class BookController {
             model.addAttribute("publishers", Arrays.asList(publishersResponse.getBody()));
             model.addAttribute("authors", Arrays.asList(authorsResponse.getBody()));
             model.addAttribute("genres",Arrays.asList(genresResponse.getBody()));
+            model.addAttribute("languages", Language.values());
             return "addBookPage";
         }
-        return "errorPageNewBook";
-
+        return "addBookPage";
     }
 }

@@ -1,3 +1,5 @@
+let currentPage = 0;
+let commentsHtml = ``;
 
 document.getElementById("input-quantity").addEventListener("keyup",() => {
     const value = parseInt(document.getElementById("input-quantity").value);
@@ -77,9 +79,49 @@ async function addToBasket(bookId){
     }
 }
 
-function loadMoreComments(bookId){
-    console.log(bookId)
+if(comments.length < 3) {
+    document.querySelector(".comments-load-more").style = "display: none;"
+} else {
+    document.querySelector(".comments-load-more").style = "display: block;"
 }
+
+function loadMoreComments(){
+
+    if(currentPage === 0) {
+        for(i = 0; i < 3; i++) {
+            if(comments[i]){
+                commentsHtml = commentsHtml + `
+                <div class="details-single-comment">
+                    <p class="single-comment-user">${coments[i].user.username}</p>
+                    <p class="single-comment-stars">${comments[i].rating}<i class="fa fa-star"></i></p>
+                    <p class="single-comment-review">${comments[i].text}</p>
+                </div>
+                `
+            }
+        }
+        document.querySelector(".product-details-comments").innerHTML = commentsHtml;
+        return;
+    }
+
+    for(i = currentPage * 3; i < currentPage * 3 + 4; i++){
+
+        if(comments[i]){
+            commentsHtml = commentsHtml + `
+                <div class="details-single-comment">
+                    <p class="single-comment-user">${coments[i].user.username}</p>
+                    <p class="single-comment-stars">${comments[i].rating}<i class="fa fa-star"></i></p>
+                    <p class="single-comment-review">${comments[i].text}</p>
+                </div>
+                `
+        }
+        }
+
+        document.querySelector(".product-details-comments").innerHTML = "";
+        document.querySelector(".product-details-comments").innerHTML = commentsHtml;
+        currentPage += 1;
+    }
+
+loadMoreComments();
 
 function backToMain(){
     window.alert("Uspešno ste dodali u korpu!")

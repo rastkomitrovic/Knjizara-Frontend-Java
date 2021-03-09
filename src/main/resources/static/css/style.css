@@ -123,6 +123,9 @@ html {
     transform: scale(1.1);
     cursor: pointer;
 }
+.change-profile-info{
+    position: relative;
+}
 
 .change-profile-info button:hover{
     transform: scale(1.1);
@@ -1222,6 +1225,34 @@ html {
 
 #paypal-button-container{
     min-width: 50vw !important;
+}
+
+/********************************** add book page ************************************/
+.genres-wrapper-mod{
+    max-height: 20vw;
+    width: 30rem;
+    margin: 0 3rem;
+    display: flex;
+}
+
+.genres-wrapper-mod > [type="checkbox"]
+{
+    vertical-align:middle;
+}
+
+.genres-wrapper-mod > li {
+    list-style: none;
+}
+
+.put-element-right{
+    display: block;
+    float: right;
+    margin-bottom: 2rem;
+}
+
+.more-images{
+    display: flex;
+    flex-direction: column;
 }
 
 

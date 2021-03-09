@@ -60,7 +60,7 @@ window.onload = async function () {
     let details = JSON.parse(localStorage.getItem("details"))
     console.log("ovde")
     if (myBasket != null && details != null) {
-        await fetch("http://localhost:9099/processOrder", {
+        const req = await fetch("http://localhost:9099/processOrder", {
             method: "POST", body: JSON.stringify({
                 orderId: details.id,
                 items: myBasket
@@ -68,6 +68,13 @@ window.onload = async function () {
                 'Content-Type': 'application/json'
             },
         })
+        if (req.status === 200) {
+            localStorage.removeItem("myBasket");
+            localStorage.removeItem("details");
+            localStorage.removeItem("totalSum");
+        }
+        console.log("XXXXXXXXXXXXXXXXXX", req)
+        //if succes empty basket and details and totalSum
     }
 }
 

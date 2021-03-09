@@ -3,6 +3,7 @@ package com.fon.knjizarafrontend.service.impl;
 import com.fon.knjizarafrontend.constants.ApiConstants;
 import com.fon.knjizarafrontend.constants.RestPageImpl;
 import com.fon.knjizarafrontend.dto.BookDTO;
+import com.fon.knjizarafrontend.fc.Book;
 import com.fon.knjizarafrontend.service.BookService;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -65,21 +66,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public ResponseEntity<Object> saveBook(BookDTO bookDTO) {
-        return restTemplate.postForEntity(api, bookDTO, Object.class);
-    }
-
-    @Override
-    public ResponseEntity<Object> updateBook(BookDTO bookDTO) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<BookDTO> entity = new HttpEntity<>(bookDTO, headers);
-        return restTemplate.exchange(api, HttpMethod.PUT, entity, Object.class);
-    }
-
-    @Override
-    public ResponseEntity<Object> deleteBook(long bookId) {
-        return restTemplate.exchange(api + "/" + bookId, HttpMethod.DELETE, null, Object.class);
+    public ResponseEntity<Object> saveBook(Book book) {
+        return restTemplate.postForEntity(api, book, Object.class);
     }
 
     @Override

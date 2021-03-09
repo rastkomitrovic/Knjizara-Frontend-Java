@@ -160,8 +160,7 @@
 <script>
     const isFirst =${isFirst};
     const isLast =${isLastPage};
-    const currentPage =
-    ${currentPage}
+    const currentPage =${currentPage}
 </script>
 <script src="${pageContext.request.contextPath}/js/MainPage.js"></script>
 <script src="${pageContext.request.contextPath}/js/SearchResultPageScript.js"></script>

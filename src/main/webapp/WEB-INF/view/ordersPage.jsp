@@ -125,7 +125,7 @@
     </c:when>
 
     <c:otherwise>
-        <h1 class="search-result-heading">Nije pronadjena nijedna knjiga po zadatom kriterijumu</h1>
+        <h1 class="search-result-heading">Nije pronadjena nijedna narudzbina za vas nalog</h1>
     </c:otherwise>
 </c:choose>
 

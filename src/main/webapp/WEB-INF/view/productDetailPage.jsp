@@ -166,13 +166,13 @@
 </section>
 
 <section class="product-details-comments">
-    <c:forEach var="comment" items="${book.comments}">
+    <!--<c:forEach var="comment" items="${book.comments}" begin="0" >
         <div class="details-single-comment">
             <p class="single-comment-user">${comment.user.username}</p>
             <p class="single-comment-stars">${comment.rating}<i class="fa fa-star"></i></p>
             <p class="single-comment-review">${comment.text}</p>
         </div>
-    </c:forEach>
+    </c:forEach> -->
 </section>
 
 <button class="comments-load-more" onclick="loadMoreComments(${bookId})">Još komentara</button>
@@ -199,7 +199,10 @@
 </footer>
 
 <script>
-    let numOfComments = ${book.comments.size()}
+    let numOfComments = ${book.comments.size()};
+;
+    let comments = JSON.parse(${book.comments})
+    console.log(comments)
 </script>
 <script src="${pageContext.request.contextPath}/js/MainPage.js"></script>
 <script src="${pageContext.request.contextPath}/js/Utils/checkAvailableQuantity.js"></script>

@@ -119,6 +119,7 @@
     </div>
     <a href="${pageContext.request.contextPath}/stores">Voliš miris knjiga? Poseti naše radnje!</a>
 </footer>
+<script src="${pageContext.request.contextPath}/js/MainPage.js"></script>
 
 </body>
 </html>

@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -80,40 +81,67 @@
     </div>
 </nav>
 
-<section style="width: 90%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; min-height: 70vh">
+<section style="width: 90%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; min-height: 70vh; font-size: 1.5rem">
 
-    <form:form modelAttribute="book" cssClass="change-profile-info" action="/changeAuthorInfo">
+    <form:form modelAttribute="book" cssClass="change-profile-info" action="/saveBook" method="post">
         <div class="form-control">
-            <label for="name">Ime knjige:</label>
-            <form:input path="firstName" id="name"/>
+            <label for="newIsbn">ISBN: </label>
+            <form:input path="isbn" id="newIsbn"/>
         </div>
         <div class="form-control">
-            <label for="name">Autor:</label>
-            <form:input path="firstName" id="name"/>
+            <label for="newBookName">Naziv knjige: </label>
+            <form:input path="bookName" id="newBookName"/>
         </div>
         <div class="form-control">
-            <label for="name">Žanr:</label>
-            <form:input path="firstName" id="name"/>
+            <label for="newBookDescription">Kratak opis: </label>
+            <form:textarea path="description" id="newBookDescription" />
         </div>
         <div class="form-control">
-            <label for="name">ISBN:</label>
-            <form:input path="firstName" id="name"/>
+            <label for="newPrice">Cena po komadu:</label>
+            <form:input path="price" id="newPrice"/>
         </div>
         <div class="form-control">
-            <label for="description">Opis: </label>
-            <form:textarea path="description" id="description"/>
+            <label for="newStock">Kolicina na stanju:</label>
+            <form:input path="stock" id="newStock"/>
         </div>
-        <div class="form-control">
-            <label for="middle-name">Cena:</label>
-            <form:input path="middleName" id="middle-name"/>
+        <div class="form-control" id="images">
+            <label for="newImages">Slike:</label>
+            <div class="more-images">
+                <form:input path="images" id="newImages"/>
+            </div>
+
         </div>
+        <button class="put-element-right" id="add-images-button">Dodaj još slika</button>
         <div class="form-control">
-            <label for="middle-name">Količina na stanju:</label>
-            <form:input path="middleName" id="middle-name"/>
+            <label for="language">Jezik:</label>
+            <form:select path="language" id="language" items="${languages}"/>
         </div>
+
+        <div style="display: flex; justify-content: center">
+            <div class="genres-wrapper genres-wrapper-mod">
+                <c:forEach items="${genres}" var="genre">
+                    <li>
+                        <form:checkbox cssClass="single-checkbox" path="genres" id="${genre.genreId}" value="${genre.genreId}"/>
+                        <label for="${genre.genreId}">${genre.genreName}</label>
+                    </li>
+                    </c:forEach>
+            </div>
+
+            <div class="genres-wrapper genres-wrapper-mod">
+                <c:forEach items="${authors}" var="author">
+                    <li>
+                        <form:checkbox cssClass="single-checkbox" path="authors" value="${author.authorId}" id="${author.authorId}"/>
+                        <label for="${author.authorId}">${author.toString()}</label>
+                    </li>
+
+                </c:forEach>
+            </div>
+        </div>
+
+
         <div class="form-control">
-            <label for="middle-name">Jezik:</label>
-            <form:input path="middleName" id="middle-name"/>
+            <label for="publisher">Izdavač: </label>
+            <form:select path="publisher" items="${publishers}" itemLabel="publisherName" itemValue="publisherId"/>
         </div>
 
 
@@ -132,6 +160,12 @@
     </div>
     <a href="${pageContext.request.contextPath}/stores">Voliš miris knjiga? Poseti naše radnje!</a>
 </footer>
+<script>
+    let errorMessage="";
+    errorMessage = `${errorMessage}`;
+</script>
+<script src="${pageContext.request.contextPath}/js/MainPage.js"></script>
+<script src="${pageContext.request.contextPath}/js/NewBookScript.js"></script>
 
 </body>
 </html>

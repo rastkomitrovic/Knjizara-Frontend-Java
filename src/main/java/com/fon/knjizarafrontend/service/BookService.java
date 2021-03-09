@@ -3,6 +3,7 @@ package com.fon.knjizarafrontend.service;
 import com.fon.knjizarafrontend.constants.RestPageImpl;
 import com.fon.knjizarafrontend.dto.AuthorDTO;
 import com.fon.knjizarafrontend.dto.BookDTO;
+import com.fon.knjizarafrontend.fc.Book;
 import org.springframework.http.ResponseEntity;
 
 public interface BookService {
@@ -20,11 +21,7 @@ public interface BookService {
 
     ResponseEntity<RestPageImpl<BookDTO>> findBooksByPublisher(Long publisherId, int page, int size, String sort);
 
-    ResponseEntity<Object> saveBook(BookDTO bookDTO);
-
-    ResponseEntity<Object> updateBook(BookDTO bookDTO);
-
-    ResponseEntity<Object> deleteBook(long bookId);
+    ResponseEntity<Object> saveBook(Book book);
 
     ResponseEntity<BookDTO[]> getAllBooksBestReviews();
 }
