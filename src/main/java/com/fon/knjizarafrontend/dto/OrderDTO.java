@@ -22,4 +22,6 @@ public class OrderDTO {
     private List<OrderItemDTO> orderItems;
     @JsonProperty("dateCreated")
     private Date dateCreated;
+    @JsonProperty("total")
+    private double total;
 }

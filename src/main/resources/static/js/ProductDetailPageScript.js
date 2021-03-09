@@ -1,6 +1,5 @@
 let currentPage = 0;
-let commentsHtml = ``;
-
+let htmlComments = "";
 document.getElementById("input-quantity").addEventListener("keyup",() => {
     const value = parseInt(document.getElementById("input-quantity").value);
     if(value > 20) {
@@ -78,50 +77,62 @@ async function addToBasket(bookId){
         window.alert("Nema dovoljno primeraka na stanju!");
     }
 }
+let comments = [];
+async function getComments(){
+    const res = await fetch(`http://localhost:9090/api/v0/comments/${bookId}`)
+    comments = await res.json()
+}
 
-if(comments.length < 3) {
-    document.querySelector(".comments-load-more").style = "display: none;"
-} else {
-    document.querySelector(".comments-load-more").style = "display: block;"
+getComments().then(() => {
+    if(comments.length < 3) {
+        document.querySelector(".comments-load-more").style = "display: none;"
+        comments.forEach(com => {
+            htmlComments = htmlComments + generateComment(com)
+        })
+        document.querySelector(".product-details-comments").innerHTML = htmlComments;
+    } else {
+        for(let i=0; i<3; i++){
+
+            htmlComments = htmlComments + generateComment(comments[i])
+        }
+        currentPage++;
+        document.querySelector(".product-details-comments").innerHTML = htmlComments;
+        document.querySelector(".comments-load-more").style = "display: block;"
+    }
+});
+
+function deleteComment(commentId) {
+    window.location = `http://localhost:9099/p/deleteComment/${bookId}/${commentId}`
+}
+
+function generateComment(comment){
+    let deleteButton = ""
+    if(comment.user.username === currentUsername) {
+        deleteButton = `<button onclick=deleteComment(${comment.commentId}) class=details-info-cta>Obriši komentar</button>`
+    }
+    return `
+                <div class="details-single-comment">
+                    <p class="single-comment-user">${comment.user.username}</p>
+                    <p class="single-comment-stars">${comment.rating}<i class="fa fa-star"></i></p>
+                    <p class="single-comment-review">${comment.text}</p>
+                    ${deleteButton}
+                </div>
+            `
 }
 
 function loadMoreComments(){
-
-    if(currentPage === 0) {
-        for(i = 0; i < 3; i++) {
-            if(comments[i]){
-                commentsHtml = commentsHtml + `
-                <div class="details-single-comment">
-                    <p class="single-comment-user">${coments[i].user.username}</p>
-                    <p class="single-comment-stars">${comments[i].rating}<i class="fa fa-star"></i></p>
-                    <p class="single-comment-review">${comments[i].text}</p>
-                </div>
-                `
-            }
-        }
-        document.querySelector(".product-details-comments").innerHTML = commentsHtml;
-        return;
-    }
-
-    for(i = currentPage * 3; i < currentPage * 3 + 4; i++){
-
+    for(let i = currentPage *3; i<currentPage*3+3; i++){
         if(comments[i]){
-            commentsHtml = commentsHtml + `
-                <div class="details-single-comment">
-                    <p class="single-comment-user">${coments[i].user.username}</p>
-                    <p class="single-comment-stars">${comments[i].rating}<i class="fa fa-star"></i></p>
-                    <p class="single-comment-review">${comments[i].text}</p>
-                </div>
-                `
-        }
-        }
 
-        document.querySelector(".product-details-comments").innerHTML = "";
-        document.querySelector(".product-details-comments").innerHTML = commentsHtml;
-        currentPage += 1;
+            htmlComments = htmlComments + generateComment(comments[i])
+
+        } else {
+            document.querySelector(".comments-load-more").style = "display: none;"
+        }
     }
-
-loadMoreComments();
+    currentPage++;
+    document.querySelector(".product-details-comments").innerHTML = htmlComments;
+}
 
 function backToMain(){
     window.alert("Uspešno ste dodali u korpu!")
@@ -129,7 +140,5 @@ function backToMain(){
 }
 
 const moreCommentsBtn = document.querySelector(".comments-load-more")
+moreCommentsBtn.addEventListener("click", loadMoreComments)
 
-if(parseInt(numOfComments) === 0){
-    moreCommentsBtn.style = "display:none;"
-}

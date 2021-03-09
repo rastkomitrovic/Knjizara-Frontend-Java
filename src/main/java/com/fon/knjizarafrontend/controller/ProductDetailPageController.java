@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import java.security.Principal;
 
 @Controller
 public class ProductDetailPageController {
@@ -31,12 +32,13 @@ public class ProductDetailPageController {
 
 
     @RequestMapping("/p/{bookId}")
-    public String productDetailPage(@PathVariable("bookId") long bookId, Model model) {
+    public String productDetailPage(@PathVariable("bookId") long bookId, Model model, Principal principal) {
         ResponseEntity<BookDTO> response = bookService.findBookByBookId(bookId);
         String username=(String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (response.getStatusCode() == HttpStatus.OK) {
             BookDTO book = response.getBody();
             model.addAttribute("book",book);
+            model.addAttribute("username", principal.getName());
             Comment comment=new Comment();
             comment.setBookId(bookId);
             comment.setUsername(username);
@@ -44,11 +46,11 @@ public class ProductDetailPageController {
             model.addAttribute("availableRatingsInts", PageConstants.availableRatingsInts);
             return "productDetailPage";
         }
-        return "productNotFound";
+        return "errorPage";
     }
 
     @PostMapping(value = "/p/postComment", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String postComment(Comment comment, Model model){
+    public String postComment(Comment comment, Model model, Principal principal ){
 
         ResponseEntity<Object> responseComment=commentService.saveComment(comment);
         if(responseComment.getStatusCode()==HttpStatus.OK)
@@ -60,6 +62,7 @@ public class ProductDetailPageController {
 
         ResponseEntity<BookDTO> responseBookNew=bookService.findBookByBookId(comment.getBookId());
         model.addAttribute("book",responseBookNew.getBody());
+        model.addAttribute("username", principal.getName());
         Comment newComment=new Comment();
         newComment.setBookId(comment.getBookId());
         newComment.setUsername(comment.getUsername());
@@ -72,6 +75,6 @@ public class ProductDetailPageController {
     @GetMapping("/p/deleteComment/{bookId}/{commentId}")
     public String deleteComment(Model model, @PathVariable long bookId, @PathVariable long commentId){
         commentService.deleteComment(commentId);
-        return productDetailPage(bookId,model);
+        return "redirect:/p/" + bookId;
     }
 }

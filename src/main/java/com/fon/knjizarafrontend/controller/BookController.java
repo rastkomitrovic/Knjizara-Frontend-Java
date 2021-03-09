@@ -40,48 +40,52 @@ public class BookController {
     private GenreService genreService;
 
     @InitBinder
-    public void initBinder(WebDataBinder webDataBinder){
+    public void initBinder(WebDataBinder webDataBinder) {
 
     }
 
     @RequestMapping("/newBook")
-    public String addBook(Model model){
-        model.addAttribute("book",new Book());
+    public String addBook(Model model) {
+        model.addAttribute("book", new Book());
 
-        ResponseEntity<PublisherDTO[]> publishersResponse=publisherService.getAllPublishers();
-        ResponseEntity<AuthorDTO[]> authorsResponse=authorService.findAllAuthorsNoPaging();
-        ResponseEntity<GenreDTO[]> genresResponse=genreService.getAllGenresNoPaging();
+        ResponseEntity<PublisherDTO[]> publishersResponse = publisherService.getAllPublishers();
+        ResponseEntity<AuthorDTO[]> authorsResponse = authorService.findAllAuthorsNoPaging();
+        ResponseEntity<GenreDTO[]> genresResponse = genreService.getAllGenresNoPaging();
         model.addAttribute("errorMessage", "");
-        if(publishersResponse.getStatusCode()== HttpStatus.OK && authorsResponse.getStatusCode()==HttpStatus.OK && genresResponse.getStatusCode()==HttpStatus.OK){
+        if (publishersResponse.getStatusCode() == HttpStatus.OK && authorsResponse.getStatusCode() == HttpStatus.OK && genresResponse.getStatusCode() == HttpStatus.OK) {
             model.addAttribute("publishers", Arrays.asList(publishersResponse.getBody()));
             model.addAttribute("authors", Arrays.asList(authorsResponse.getBody()));
-            model.addAttribute("genres",Arrays.asList(genresResponse.getBody()));
+            model.addAttribute("genres", Arrays.asList(genresResponse.getBody()));
             model.addAttribute("languages", Language.values());
             return "addBookPage";
         }
-        return "errorPageNewBook";
+        return "errorPage";
 
     }
 
     @PostMapping(path = "/saveBook", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String saveBook(Book book, Model model){
+    public String saveBook(Book book, Model model) {
+        if (book.getAuthors().isEmpty() || book.getBookName().isEmpty() ||
+                book.getDescription().isEmpty() || book.getGenres().isEmpty() || book.getImages().isEmpty() ||
+                book.getIsbn().isEmpty() || book.getPrice() > 0 || book.getStock() > 0){
+            model.addAttribute("errorMessage", "Niste uneli sve neophodne podatke!");
+            model.addAttribute("book", book);
+
+            ResponseEntity<PublisherDTO[]> publishersResponse = publisherService.getAllPublishers();
+            ResponseEntity<AuthorDTO[]> authorsResponse = authorService.findAllAuthorsNoPaging();
+            ResponseEntity<GenreDTO[]> genresResponse = genreService.getAllGenresNoPaging();
+
+            if (publishersResponse.getStatusCode() == HttpStatus.OK && authorsResponse.getStatusCode() == HttpStatus.OK && genresResponse.getStatusCode() == HttpStatus.OK) {
+                model.addAttribute("publishers", Arrays.asList(publishersResponse.getBody()));
+                model.addAttribute("authors", Arrays.asList(authorsResponse.getBody()));
+                model.addAttribute("genres", Arrays.asList(genresResponse.getBody()));
+                model.addAttribute("languages", Language.values());
+                return "addBookPage";
+            }
+        }
         ResponseEntity<Object> responseEntity=bookService.saveBook(book);
         if(responseEntity.getStatusCode()==HttpStatus.OK)
             return "redirect:/mainPage";
-        model.addAttribute("errorMessage", "Some error message");
-        model.addAttribute("book",book);
-
-        ResponseEntity<PublisherDTO[]> publishersResponse=publisherService.getAllPublishers();
-        ResponseEntity<AuthorDTO[]> authorsResponse=authorService.findAllAuthorsNoPaging();
-        ResponseEntity<GenreDTO[]> genresResponse=genreService.getAllGenresNoPaging();
-
-        if(publishersResponse.getStatusCode()== HttpStatus.OK && authorsResponse.getStatusCode()==HttpStatus.OK && genresResponse.getStatusCode()==HttpStatus.OK){
-            model.addAttribute("publishers", Arrays.asList(publishersResponse.getBody()));
-            model.addAttribute("authors", Arrays.asList(authorsResponse.getBody()));
-            model.addAttribute("genres",Arrays.asList(genresResponse.getBody()));
-            model.addAttribute("languages", Language.values());
-            return "addBookPage";
-        }
-        return "addBookPage";
+        return "errorPage";
     }
 }

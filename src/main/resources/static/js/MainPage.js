@@ -58,7 +58,6 @@ document.body.addEventListener("click", () => {
 window.onload = async function () {
     let myBasket = JSON.parse(localStorage.getItem("myBasket"))
     let details = JSON.parse(localStorage.getItem("details"))
-    console.log("ovde")
     if (myBasket != null && details != null) {
         const req = await fetch("http://localhost:9099/processOrder", {
             method: "POST", body: JSON.stringify({
