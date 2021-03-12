@@ -1256,5 +1256,74 @@ html {
     flex-direction: column;
 }
 
+/********************************** all orders page ************************************/
 
+.single-order{
+    width: 80%;
+    min-height: 6rem;
+}
+
+.single-order-overview{
+    background-color: var(--color-primary-darker);
+    color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.single-order-overview:not(:last-child){
+    margin-bottom: 1rem;
+}
+
+.overview-date{
+    font-size: 2rem;
+}
+
+.overview-total{
+    font-size: 2rem;
+}
+
+.single-order-details{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 9rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background-color: var(--color-primary-lighter);
+    padding: 2rem;
+    border-radius: 5px;
+}
+
+.image-wrapper{
+    width: 20%;
+}
+
+.order-details-image{
+    height: 7rem;
+}
+
+.order-details-name{
+    font-size: 2rem;
+    width: 20%;
+}
+
+.order-details-quantity{
+    font-size: 2rem;
+    width: 20%;
+}
+
+.order-details-price{
+    font-size: 2rem;
+    width: 20%;
+}
+
+.order-details-total{
+    font-size: 3rem;
+    width: 20%;
+}
 

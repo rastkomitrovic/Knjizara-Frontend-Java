@@ -49,7 +49,6 @@ public class SearchResultController {
 
         RestPageImpl<BookDTO> restPage = response.getBody();
 
-
         model.addAttribute("isEmpty", restPage.isEmpty());
         if (restPage.isEmpty()) {
             return "searchResultPage";

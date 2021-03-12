@@ -47,7 +47,7 @@
         </sec:authorize>
         <sec:authorize access="isAuthenticated()">
             <p class="navigation-element">
-                <a href="${pageContext.request.contextPath}/orders/0/15/dateCreated">Pregledaj narudzbine</a>
+                <a href="${pageContext.request.contextPath}/orders/0/5/dateCreated">Pregledaj narudzbine</a>
             </p>
         </sec:authorize>
     </div>
