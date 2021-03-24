@@ -1,7 +1,7 @@
 package com.fon.knjizarafrontend.constants;
 
 public class ApiConstants {
-    private static final String apiBase = "https://rastkomitrovic-knjizara-rest-wx4qp.ondigitalocean.app/rastkomitrovic-knjizara-rest/api/v0/";
+    private static final String apiBase = "https://rastkomitrovic-knjizara-rest-wx4qp.ondigitalocean.app";
     public static final String countriesApi = apiBase + "countries";
     public static final String authorsApi = apiBase + "authors";
     public static final String basketEntriesApi = apiBase + "basketEntries";
