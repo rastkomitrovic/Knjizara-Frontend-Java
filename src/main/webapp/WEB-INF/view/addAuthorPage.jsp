@@ -83,6 +83,7 @@
 <section style="width: 90%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; min-height: 70vh">
 
     <form:form modelAttribute="author" method="post" cssClass="change-profile-info" action="/saveAuthor">
+        <form:input path="authorId" type="hidden"/>
         <div class="form-control">
             <label for="name">Ime: </label>
             <form:input path="firstName" id="name"/>

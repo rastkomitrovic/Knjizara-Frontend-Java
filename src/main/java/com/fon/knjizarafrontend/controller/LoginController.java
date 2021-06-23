@@ -3,7 +3,6 @@ package com.fon.knjizarafrontend.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fon.knjizarafrontend.fc.LoginUser;
-import com.fon.knjizarafrontend.service.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +14,6 @@ import java.text.ParseException;
 @Controller
 public class LoginController {
 
-    @Resource
-    private EmailService emailService;
 
     @RequestMapping("/loginFailed")
     public String errorLogin(Model model) throws JsonProcessingException {
