@@ -25,40 +25,4 @@ public class StoreServiceImpl implements StoreService {
         return restTemplate.getForEntity(api, StoreDTO[].class);
     }
 
-    @Override
-    public ResponseEntity<RestPageImpl<StoreDTO>> findAllStoresPaging(int page, int size, String sort) {
-        ParameterizedTypeReference<RestPageImpl<StoreDTO>> responseType = new ParameterizedTypeReference<RestPageImpl<StoreDTO>>() {
-        };
-        return restTemplate.exchange(api + "/" + page + "/" + size + "/" + sort, HttpMethod.GET, null, responseType);
-    }
-
-    @Override
-    public ResponseEntity<RestPageImpl<StoreDTO>> findAllStoresPagingSearch(int page, int size, String sort, String param) {
-        ParameterizedTypeReference<RestPageImpl<StoreDTO>> responseType = new ParameterizedTypeReference<RestPageImpl<StoreDTO>>() {
-        };
-        return restTemplate.exchange(api + "/" + page + "/" + size + "/" + sort + "/" + param, HttpMethod.GET, null, responseType);
-    }
-
-    @Override
-    public ResponseEntity<StoreDTO> findStoreByStoreId(long storeId) {
-        return restTemplate.getForEntity(api + "/" + storeId, StoreDTO.class);
-    }
-
-    @Override
-    public ResponseEntity<Object> saveStore(StoreDTO storeDTO) {
-        return restTemplate.postForEntity(api, storeDTO, Object.class);
-    }
-
-    @Override
-    public ResponseEntity<Object> updateStore(StoreDTO storeDTO) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<StoreDTO> entity = new HttpEntity<>(storeDTO, headers);
-        return restTemplate.exchange(api, HttpMethod.PUT, entity, Object.class);
-    }
-
-    @Override
-    public ResponseEntity<Object> deleteStore(long storeId) {
-        return restTemplate.exchange(api + "/" + storeId, HttpMethod.DELETE, null, Object.class);
-    }
 }

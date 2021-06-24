@@ -20,10 +20,6 @@ public class BookServiceImpl implements BookService {
 
     private final String api = ApiConstants.booksApi;
 
-    @Override
-    public ResponseEntity<BookDTO[]> getAllBooks() {
-        return restTemplate.getForEntity(api, BookDTO[].class);
-    }
 
     @Override
     public ResponseEntity<BookDTO> findBookByBookId(long bookId) {

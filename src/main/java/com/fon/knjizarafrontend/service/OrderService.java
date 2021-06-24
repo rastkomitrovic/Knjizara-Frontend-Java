@@ -14,6 +14,4 @@ public interface OrderService {
 
     ResponseEntity<Object> saveOrder(OrderRequest orderRequest);
 
-    ResponseEntity<OrderDTO> findOrderByOrderId(String orderId);
-
 }

@@ -117,7 +117,7 @@
                                action="${pageContext.request.contextPath}/search/${i-1}/${size}/${sort}/${searchType}/${searchParam}"
                                method="get">
                         <c:choose>
-                            <c:when test="${i eq currentPage}">
+                            <c:when test="${i-1 eq currentPage}">
                                 <button disabled class="results-nav-btn-bold">
                                         ${i}
                                 </button>

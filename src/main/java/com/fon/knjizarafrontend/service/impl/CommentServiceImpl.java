@@ -19,11 +19,6 @@ public class CommentServiceImpl implements CommentService {
     private final String api = ApiConstants.commentsApi;
 
     @Override
-    public ResponseEntity<CommentDTO[]> findCommentsByBookId(long bookId) {
-        return restTemplate.getForEntity(api + "/" + bookId, CommentDTO[].class);
-    }
-
-    @Override
     public ResponseEntity<Object> saveComment(Comment comment) {
         return restTemplate.postForEntity(api, comment, Object.class);
     }

@@ -25,20 +25,6 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public ResponseEntity<RestPageImpl<AuthorDTO>> findAllAuthors(int page, int size, String sort) {
-        ParameterizedTypeReference<RestPageImpl<AuthorDTO>> responseType = new ParameterizedTypeReference<RestPageImpl<AuthorDTO>>() {
-        };
-        return restTemplate.exchange(api + "/" + page + "/" + size + "/" + sort, HttpMethod.GET, null, responseType);
-    }
-
-    @Override
-    public ResponseEntity<RestPageImpl<AuthorDTO>> findAllAuthorsSearch(int page, int size, String sort, String param) {
-        ParameterizedTypeReference<RestPageImpl<AuthorDTO>> responseType = new ParameterizedTypeReference<RestPageImpl<AuthorDTO>>() {
-        };
-        return restTemplate.exchange(api + "/" + page + "/" + size + "/" + sort + "/" + param, HttpMethod.GET, null, responseType);
-    }
-
-    @Override
     public ResponseEntity<Object> saveAuthor(AuthorDTO authorDTO) {
         return restTemplate.postForEntity(api, authorDTO, Object.class);
     }

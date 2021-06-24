@@ -8,11 +8,4 @@ public interface CityService {
 
     ResponseEntity<CityDTO> findCityByCityId(long cityId);
 
-    ResponseEntity<CityDTO[]> findCitiesByCityNameContaining(String param);
-
-    ResponseEntity<Object> saveCity(CityDTO cityDTO);
-
-    ResponseEntity<Object> updateCity(CityDTO cityDTO);
-
-    ResponseEntity<Object> deleteCity(long cityId);
 }

@@ -7,7 +7,6 @@ import com.fon.knjizarafrontend.fc.Book;
 import org.springframework.http.ResponseEntity;
 
 public interface BookService {
-    ResponseEntity<BookDTO[]> getAllBooks();
 
     ResponseEntity<BookDTO> findBookByBookId(long bookId);
 

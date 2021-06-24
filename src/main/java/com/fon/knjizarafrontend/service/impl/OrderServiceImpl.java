@@ -34,10 +34,4 @@ public class OrderServiceImpl implements OrderService {
         return restTemplate.postForEntity(api, orderRequest, Object.class);
     }
 
-    @Override
-    public ResponseEntity<OrderDTO> findOrderByOrderId(String orderId) {
-        return restTemplate.getForEntity(api + "/id/" + orderId, OrderDTO.class);
-    }
-
-
 }

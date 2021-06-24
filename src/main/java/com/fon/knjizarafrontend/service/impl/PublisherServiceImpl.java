@@ -22,26 +22,4 @@ public class PublisherServiceImpl implements PublisherService {
         return restTemplate.getForEntity(api, PublisherDTO[].class);
     }
 
-    @Override
-    public ResponseEntity<PublisherDTO> findPublisherByPublisherId(Long publisherId) {
-        return restTemplate.getForEntity(api + "/" + publisherId, PublisherDTO.class);
-    }
-
-    @Override
-    public ResponseEntity<Object> savePublisher(PublisherDTO publisher) {
-        return restTemplate.postForEntity(api, publisher, Object.class);
-    }
-
-    @Override
-    public ResponseEntity<Object> updatePublisher(PublisherDTO publisher) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<PublisherDTO> entity = new HttpEntity<>(publisher, headers);
-        return restTemplate.exchange(api, HttpMethod.PUT, entity, Object.class);
-    }
-
-    @Override
-    public ResponseEntity<Object> deletePublisher(Long publisherId) {
-        return restTemplate.exchange(api + "/" + publisherId, HttpMethod.DELETE, null, Object.class);
-    }
 }

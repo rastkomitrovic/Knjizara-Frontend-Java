@@ -5,7 +5,6 @@ import com.fon.knjizarafrontend.fc.Comment;
 import org.springframework.http.ResponseEntity;
 
 public interface CommentService {
-    ResponseEntity<CommentDTO[]> findCommentsByBookId(long bookId);
 
     ResponseEntity<Object> saveComment(Comment comment);
 

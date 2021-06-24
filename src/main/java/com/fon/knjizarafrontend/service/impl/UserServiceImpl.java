@@ -23,11 +23,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<Object> deleteUserByUsername(String username) {
-        return restTemplate.exchange(api + "/" + username, HttpMethod.DELETE, null, Object.class);
-    }
-
-    @Override
     public ResponseEntity<Object> saveUser(UserDTO userDTO) {
         return restTemplate.postForEntity(api, userDTO, Object.class);
     }
