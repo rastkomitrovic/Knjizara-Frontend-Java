@@ -79,7 +79,9 @@
 </nav>
 
 <section style="width: 90%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; min-height: 70vh">
-    <form:form modelAttribute="author" cssClass="change-profile-info" action="/changeAuthorInfo">
+    <form:form modelAttribute="author" cssClass="change-profile-info" action="/changeAuthorInfo" method="post">
+        <form:input path="authorId" type="hidden"/>
+        <form:input type="hidden" path="dateOfBirth" id="dateOfBirth"/>
         <div class="form-control">
             <label for="name">Ime:</label>
             <form:input path="firstName" id="name"/>

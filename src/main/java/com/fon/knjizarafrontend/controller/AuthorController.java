@@ -1,24 +1,34 @@
 package com.fon.knjizarafrontend.controller;
 
 import com.fon.knjizarafrontend.dto.AuthorDTO;
+import com.fon.knjizarafrontend.dto.CityDTO;
 import com.fon.knjizarafrontend.fc.Author;
 import com.fon.knjizarafrontend.service.AuthorService;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 
 @Controller
 public class AuthorController {
     @Resource
     private AuthorService authorService;
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, false));
+    }
 
     @RequestMapping("/newAuthor")
     public String addAuthor(Model model){
@@ -46,8 +56,8 @@ public class AuthorController {
         return "";
     }
 
-    @RequestMapping(value = "/saveAuthor", method = RequestMethod.POST)
-    public String saveAuthor(@RequestBody AuthorDTO author, Model model){
+    @RequestMapping(value = "/saveAuthor", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String saveAuthor(AuthorDTO author, Model model){
         if(author.getFirstName() == null || author.getFirstName().isEmpty()
         || author.getLastName() ==null || author.getLastName().isEmpty()
         || author.getDateOfBirth() == null){
@@ -55,13 +65,24 @@ public class AuthorController {
             model.addAttribute("author",author);
             return "addAuthorPage";
         }
-        if(author.getAuthorId()!=null && author.getAuthorId()!=0) {
-            if (authorService.saveAuthor(author).getStatusCode() == HttpStatus.OK)
-                return "redirect:/mainPage";
-        }else{
-            if (authorService.updateAuthor(author).getStatusCode() == HttpStatus.OK)
-                return "redirect:/mainPage";
+        author.setBooks(new LinkedList<>());
+        if (authorService.saveAuthor(author).getStatusCode() == HttpStatus.OK)
+            return "redirect:/mainPage";
+        return "";
+    }
+
+    @RequestMapping(value = "/changeAuthorInfo", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String updateAuthor(AuthorDTO author, Model model){
+        if(author.getFirstName() == null || author.getFirstName().isEmpty()
+                || author.getLastName() ==null || author.getLastName().isEmpty()
+                || author.getDateOfBirth() == null){
+            model.addAttribute("errorMessage", "Niste uneli sve neophodne podatke!");
+            model.addAttribute("author",author);
+            return "editAuthorPage";
         }
+        author.setBooks(new LinkedList<>());
+        if (authorService.updateAuthor(author).getStatusCode() == HttpStatus.OK)
+            return "redirect:/mainPage";
         return "";
     }
 }

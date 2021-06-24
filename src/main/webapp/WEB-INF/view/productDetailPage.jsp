@@ -78,23 +78,26 @@
 <section class="product-details">
     <section class="slideshow-container">
         <!-- Full-width images with number and caption text -->
-        <c:forEach begin="0" end="${book.images.size()-1}" var="i">
-            <div class="mySlides fade" id="${i}">
-                <img src="${book.images.get(i).imageUrl}" style="width:100%;"/>
-            </div>
-        </c:forEach>
-        <!-- Next and previous buttons -->
-        <c:if test="${book.images.size()>1}">
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
-            <br>
-            <!-- The dots/circles -->
-            <div style="text-align:center">
-                <c:forEach var="i" begin="0" end="${book.images.size()-1}">
-                    <span class="dot" onclick="currentSlide(${i}+1)"></span>
-                </c:forEach>
-            </div>
+        <c:if test="${book.images.size()>=0}">
+            <c:forEach begin="0" end="${book.images.size()-1}" var="i">
+                <div class="mySlides fade" id="${i}">
+                    <img src="${book.images.get(i).imageUrl}" style="width:100%;"/>
+                </div>
+            </c:forEach>
+            <!-- Next and previous buttons -->
+            <c:if test="${book.images.size()>1}">
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                <br>
+                <!-- The dots/circles -->
+                <div style="text-align:center">
+                    <c:forEach var="i" begin="0" end="${book.images.size()-1}">
+                        <span class="dot" onclick="currentSlide(${i}+1)"></span>
+                    </c:forEach>
+                </div>
+            </c:if>
         </c:if>
+
     </section>
 
     <section class="product-details-info">

@@ -67,7 +67,7 @@ public class BookController {
     public String saveBook(Book book, Model model) {
         if (book.getAuthors().isEmpty() || book.getBookName().isEmpty() ||
                 book.getDescription().isEmpty() || book.getGenres().isEmpty() || book.getImages().isEmpty() ||
-                book.getIsbn().isEmpty() || book.getPrice() > 0 || book.getStock() > 0){
+                book.getIsbn().isEmpty() || book.getPrice() <= 0 || book.getStock() <= 0){
             model.addAttribute("errorMessage", "Niste uneli sve neophodne podatke!");
             model.addAttribute("book", book);
 
