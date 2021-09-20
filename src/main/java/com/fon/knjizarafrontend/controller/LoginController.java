@@ -33,7 +33,7 @@ public class LoginController {
 
     @RequestMapping("/login")
     public String getLoginPage(Model model) throws JsonProcessingException, ParseException {
-        LoginUser loginUser = new LoginUser("rastko", "rastko");
+        LoginUser loginUser = new LoginUser("rastko", "Energystar19965663!");
         model.addAttribute("user", loginUser);
         return "loginPage";
     }
