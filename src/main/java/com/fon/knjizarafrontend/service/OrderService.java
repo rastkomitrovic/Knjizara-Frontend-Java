@@ -14,4 +14,5 @@ public interface OrderService {
 
     ResponseEntity<Object> saveOrder(OrderRequest orderRequest);
 
+    ResponseEntity<RestPageImpl<OrderDTO>> findOrdersPaging(int page,int size,String sort);
 }

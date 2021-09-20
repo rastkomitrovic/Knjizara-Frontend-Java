@@ -6,6 +6,7 @@ import com.fon.knjizarafrontend.request.OrderRequest;
 import com.fon.knjizarafrontend.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,11 @@ public class OrderController {
 
     @GetMapping("/orders/{page}/{size}/{sort}")
     public String ordersPage(Model model, Principal principal, @PathVariable int page, @PathVariable int size, @PathVariable String sort){
-        ResponseEntity<RestPageImpl<OrderDTO>> responseEntity=orderService.findOrdersByUsername(principal.getName(),page,size,sort);
+        ResponseEntity<RestPageImpl<OrderDTO>> responseEntity;
+        if(SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream().anyMatch(it->it.equals("ADMIN")))
+            responseEntity = orderService.findOrdersPaging(page,size,sort);
+        else
+            responseEntity = orderService.findOrdersByUsername(principal.getName(),page,size,sort);
         RestPageImpl<OrderDTO> restPage=responseEntity.getBody();
         model.addAttribute("isEmpty", restPage.isEmpty());
         if(restPage.isEmpty()){
