@@ -6,6 +6,7 @@ import com.fon.knjizarafrontend.request.OrderRequest;
 import com.fon.knjizarafrontend.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.security.Principal;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class OrderController {
@@ -36,7 +40,8 @@ public class OrderController {
     @GetMapping("/orders/{page}/{size}/{sort}")
     public String ordersPage(Model model, Principal principal, @PathVariable int page, @PathVariable int size, @PathVariable String sort){
         ResponseEntity<RestPageImpl<OrderDTO>> responseEntity;
-        if(SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream().anyMatch(it->it.equals("ADMIN")))
+        Collection<? extends GrantedAuthority> roles = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        if(roles.stream().anyMatch(it -> it.getAuthority().equals("ADMIN")))
             responseEntity = orderService.findOrdersPaging(page,size,sort);
         else
             responseEntity = orderService.findOrdersByUsername(principal.getName(),page,size,sort);

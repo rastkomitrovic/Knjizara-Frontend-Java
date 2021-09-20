@@ -44,11 +44,6 @@ public class MainController {
         ResponseEntity<BookDTO[]> bookDtoResponse = bookService.getAllBooksBestReviews();
         ResponseEntity<GenreDTO[]> genresDtoResponse = genreService.getAllGenresNoPaging();
 
-        ResponseEntity<UserDTO> resUser=userService.findUserByUsername("rastko");
-        UserDTO user=resUser.getBody();
-        user.setPassword(passwordEncoder.encode("rastko"));
-        userService.updateUser(user);
-
         ResponseEntity<AuthorDTO[]> authorsResponse=authorService.findAllAuthorsNoPaging();
         if (bookDtoResponse.getStatusCode().equals(HttpStatus.OK) && genresDtoResponse.getStatusCode().equals(HttpStatus.OK) && authorsResponse.getStatusCode().equals(HttpStatus.OK)) {
             model.addAttribute("books",
